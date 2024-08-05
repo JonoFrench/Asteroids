@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34A328082C61811C0092B175 /* thrust.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A327FE2C61811B0092B175 /* thrust.wav */; };
+		34A328092C61811C0092B175 /* saucerBig.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A327FF2C61811B0092B175 /* saucerBig.wav */; };
+		34A3280A2C61811C0092B175 /* bangMedium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328002C61811B0092B175 /* bangMedium.wav */; };
+		34A3280B2C61811C0092B175 /* beat2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328012C61811B0092B175 /* beat2.wav */; };
+		34A3280C2C61811C0092B175 /* extraShip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328022C61811B0092B175 /* extraShip.wav */; };
+		34A3280D2C61811C0092B175 /* beat1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328032C61811B0092B175 /* beat1.wav */; };
+		34A3280E2C61811C0092B175 /* fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328042C61811B0092B175 /* fire.wav */; };
+		34A3280F2C61811C0092B175 /* saucerSmall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328052C61811C0092B175 /* saucerSmall.wav */; };
+		34A328102C61811C0092B175 /* bangLarge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328062C61811C0092B175 /* bangLarge.wav */; };
+		34A328112C61811C0092B175 /* bangSmall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328072C61811C0092B175 /* bangSmall.wav */; };
+		34A328162C6184D90092B175 /* SoundFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328152C6184D90092B175 /* SoundFX.swift */; };
 		34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */; };
 		34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C342C5F9F0500C2CAAD /* ContentView.swift */; };
 		34B38C372C5F9F0700C2CAAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B38C362C5F9F0700C2CAAD /* Assets.xcassets */; };
@@ -23,6 +34,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		34A327FE2C61811B0092B175 /* thrust.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = thrust.wav; sourceTree = "<group>"; };
+		34A327FF2C61811B0092B175 /* saucerBig.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = saucerBig.wav; sourceTree = "<group>"; };
+		34A328002C61811B0092B175 /* bangMedium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangMedium.wav; sourceTree = "<group>"; };
+		34A328012C61811B0092B175 /* beat2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beat2.wav; sourceTree = "<group>"; };
+		34A328022C61811B0092B175 /* extraShip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = extraShip.wav; sourceTree = "<group>"; };
+		34A328032C61811B0092B175 /* beat1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beat1.wav; sourceTree = "<group>"; };
+		34A328042C61811B0092B175 /* fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire.wav; sourceTree = "<group>"; };
+		34A328052C61811C0092B175 /* saucerSmall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = saucerSmall.wav; sourceTree = "<group>"; };
+		34A328062C61811C0092B175 /* bangLarge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangLarge.wav; sourceTree = "<group>"; };
+		34A328072C61811C0092B175 /* bangSmall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangSmall.wav; sourceTree = "<group>"; };
+		34A328152C6184D90092B175 /* SoundFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFX.swift; sourceTree = "<group>"; };
 		34B38C2F2C5F9F0500C2CAAD /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsApp.swift; sourceTree = "<group>"; };
 		34B38C342C5F9F0500C2CAAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +72,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34A327FD2C6180FB0092B175 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				34A328062C61811C0092B175 /* bangLarge.wav */,
+				34A328002C61811B0092B175 /* bangMedium.wav */,
+				34A328072C61811C0092B175 /* bangSmall.wav */,
+				34A328032C61811B0092B175 /* beat1.wav */,
+				34A328012C61811B0092B175 /* beat2.wav */,
+				34A328022C61811B0092B175 /* extraShip.wav */,
+				34A328042C61811B0092B175 /* fire.wav */,
+				34A327FF2C61811B0092B175 /* saucerBig.wav */,
+				34A328052C61811C0092B175 /* saucerSmall.wav */,
+				34A327FE2C61811B0092B175 /* thrust.wav */,
+				34A328152C6184D90092B175 /* SoundFX.swift */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		34B38C262C5F9F0500C2CAAD = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +109,7 @@
 		34B38C312C5F9F0500C2CAAD /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				34A327FD2C6180FB0092B175 /* Sounds */,
 				34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */,
 				34B38C342C5F9F0500C2CAAD /* ContentView.swift */,
 				34B38C362C5F9F0700C2CAAD /* Assets.xcassets */,
@@ -152,7 +193,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34A3280C2C61811C0092B175 /* extraShip.wav in Resources */,
+				34A3280A2C61811C0092B175 /* bangMedium.wav in Resources */,
+				34A3280D2C61811C0092B175 /* beat1.wav in Resources */,
 				34B38C3A2C5F9F0700C2CAAD /* Preview Assets.xcassets in Resources */,
+				34A328102C61811C0092B175 /* bangLarge.wav in Resources */,
+				34A328082C61811C0092B175 /* thrust.wav in Resources */,
+				34A328112C61811C0092B175 /* bangSmall.wav in Resources */,
+				34A3280B2C61811C0092B175 /* beat2.wav in Resources */,
+				34A3280E2C61811C0092B175 /* fire.wav in Resources */,
+				34A3280F2C61811C0092B175 /* saucerSmall.wav in Resources */,
+				34A328092C61811C0092B175 /* saucerBig.wav in Resources */,
 				34B38C372C5F9F0700C2CAAD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +222,7 @@
 				34B38C542C60F96500C2CAAD /* VectorGraphics.swift in Sources */,
 				34B38C492C5FB9B200C2CAAD /* GameManager.swift in Sources */,
 				34B38C432C5F9F4800C2CAAD /* GameView.swift in Sources */,
+				34A328162C6184D90092B175 /* SoundFX.swift in Sources */,
 				34B38C452C5F9F5B00C2CAAD /* ControlsView.swift in Sources */,
 				34B38C4E2C5FDB6800C2CAAD /* BulletView.swift in Sources */,
 				34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */,
