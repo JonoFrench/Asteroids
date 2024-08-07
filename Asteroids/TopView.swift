@@ -8,11 +8,32 @@
 import SwiftUI
 
 struct TopView: View {
+    @EnvironmentObject var manager: GameManager
     var body: some View {
-        Text("SwiftUI Asteroids")
+        VStack {
+            Text("SwiftUI Asteroids")
+                .foregroundStyle(.white)
+                .font(.headline)
+            HStack {
+                Text("Lives: 3")
+                    .foregroundStyle(.white)
+                    .font(.headline)
+
+                Text("Score: ")
+                    .foregroundStyle(.white)
+                    .font(.headline)
+                Text(String(format: "%06d", manager.score))
+                    .foregroundStyle(.white)
+                Spacer()
+            }
+            
+        }.background(.black)
     }
 }
 
 #Preview {
-    TopView()
+    let previewEnvObject = GameManager()
+    return TopView()
+        .environmentObject(previewEnvObject)
+    
 }

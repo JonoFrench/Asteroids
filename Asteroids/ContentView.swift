@@ -15,7 +15,7 @@ struct ContentView: View {
             VStack {
                 TopView()
                     .frame(width: UIScreen.main.bounds.width,height: 100, alignment: .center)
-                    .background(.gray)
+                    .background(.black)
                     .zIndex(3.0)
                 Spacer()
                 GameView()
@@ -24,7 +24,7 @@ struct ContentView: View {
                 Spacer()
                 ControlsView()
                     .frame(width: UIScreen.main.bounds.width,height: 120,alignment: .center)
-                    .background(.yellow)
+                    .background(.black)
                     .zIndex(2.0)
             }
         }

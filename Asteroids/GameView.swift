@@ -21,6 +21,11 @@ struct GameView: View {
                 AsteroidView(asteroid: asteroid)
                     .position(asteroid.position)
             }
+            ForEach(manager.explosionArray, id: \.id) { explosion in
+                ExplosionView(explosion: explosion)
+                    .position(explosion.position)
+            }
+
         }
     }
 }

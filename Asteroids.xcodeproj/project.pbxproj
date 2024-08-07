@@ -18,6 +18,7 @@
 		34A328102C61811C0092B175 /* bangLarge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328062C61811C0092B175 /* bangLarge.wav */; };
 		34A328112C61811C0092B175 /* bangSmall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328072C61811C0092B175 /* bangSmall.wav */; };
 		34A328162C6184D90092B175 /* SoundFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328152C6184D90092B175 /* SoundFX.swift */; };
+		34A328182C623A2F0092B175 /* ExplosionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328172C623A2F0092B175 /* ExplosionView.swift */; };
 		34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */; };
 		34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C342C5F9F0500C2CAAD /* ContentView.swift */; };
 		34B38C372C5F9F0700C2CAAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B38C362C5F9F0700C2CAAD /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		34A328062C61811C0092B175 /* bangLarge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangLarge.wav; sourceTree = "<group>"; };
 		34A328072C61811C0092B175 /* bangSmall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangSmall.wav; sourceTree = "<group>"; };
 		34A328152C6184D90092B175 /* SoundFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFX.swift; sourceTree = "<group>"; };
+		34A328172C623A2F0092B175 /* ExplosionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplosionView.swift; sourceTree = "<group>"; };
 		34B38C2F2C5F9F0500C2CAAD /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsApp.swift; sourceTree = "<group>"; };
 		34B38C342C5F9F0500C2CAAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				34B38C4F2C6027C200C2CAAD /* AsteroidView.swift */,
 				34B38C512C602AD800C2CAAD /* SaucerView.swift */,
 				34B38C532C60F96500C2CAAD /* VectorGraphics.swift */,
+				34A328172C623A2F0092B175 /* ExplosionView.swift */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */,
 				34B38C412C5F9F3600C2CAAD /* TopView.swift in Sources */,
 				34B38C542C60F96500C2CAAD /* VectorGraphics.swift in Sources */,
+				34A328182C623A2F0092B175 /* ExplosionView.swift in Sources */,
 				34B38C492C5FB9B200C2CAAD /* GameManager.swift in Sources */,
 				34B38C432C5F9F4800C2CAAD /* GameView.swift in Sources */,
 				34A328162C6184D90092B175 /* SoundFX.swift in Sources */,

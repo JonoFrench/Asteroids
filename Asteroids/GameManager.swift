@@ -26,26 +26,34 @@ class GameManager: ObservableObject {
     var shipAngle = 0.0
     @Published
     var shipTrajectoryAngle = 0.0
-    var shipSpeed = 2.0
+    //var shipSpeed = 0.0
+    var shipVelocity = CGPoint(x: 0.0, y: 0.0)
+    var shipAcceleration = CGPoint(x: 0.0, y: 0.0)
+    var shipThrust = 1.0
+    //    ///How often in the game loop we handle the ship moving
+    var explosionTimer = 0
+    var thrustTimer = 0
     var shipLeft = false
     var shipRight = false
-    var shipMoving = false
-    var shipThrust = false
+    //var shipMoving = false
+    @Published
+    var isShipThrusting = false
     @Published
     var shipPos = CGPoint(x: 100.0, y: 100.0)
     @Published
     var bulletArray:[Bullet] = []
     @Published
     var asteroidArray:[Asteroid] = []
+    @Published
+    var explosionArray:[Explosion] = []
+    @Published
+    var score = 0
     
     
     init() {
         print("init GameManager")
         shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
-        asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 200), angle: 10, velocity: 1.0, type: .large,shape: .ShapeA))
-        asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 300), angle: 100.0, velocity: 1.0, type: .large,shape: .ShapeB))
-        asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 300), angle: 190.0, velocity: 1.0, type: .large,shape: .ShapeC))
-        asteroidArray.append(Asteroid(position: CGPoint(x: 300, y: 200), angle: 280.0, velocity: 1.0, type: .large,shape: .ShapeD))
+        addAsteroids()
         ///Here we go, lets have a nice DisplayLink to update our model with the screen refresh.
         let displayLink:CADisplayLink = CADisplayLink(target: self, selector: #selector(refreshModel))
         displayLink.add(to: .main, forMode:.common)
@@ -53,32 +61,78 @@ class GameManager: ObservableObject {
     }
     
     @objc func refreshModel() {
-        
+        /// Ship
         if shipLeft {
             rotateShipLeft()
         }
         if shipRight {
             rotateShipRight()
         }
-        if shipMoving {
-            shipPos = moveAsset(from: shipPos, atAngle: shipTrajectoryAngle, withDistance: shipSpeed)
-        }
+        moveShip()
+        /// Bullets
         if bulletArray.count > 0 {
             moveBullet()
+            checkBullets()
         }
-        
+        /// Asteroids
         moveAsteroids()
         
-        checkBullets()
+        ///Explosions
+        animateExplosions()
+    }
+    
+    func addAsteroids() {
+        asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 200), angle: 10, velocity: 1.0, type: .large,shape: .ShapeA))
+        asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 300), angle: 100.0, velocity: 1.0, type: .large,shape: .ShapeB))
+        asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 300), angle: 190.0, velocity: 1.0, type: .large,shape: .ShapeC))
+        asteroidArray.append(Asteroid(position: CGPoint(x: 300, y: 200), angle: 280.0, velocity: 1.0, type: .large,shape: .ShapeD))
+        
     }
     
     func startMovingShip() {
         shipTrajectoryAngle = shipAngle
-        shipMoving = true
+        //shipMoving = true
+        isShipThrusting = true
+        thrustTimer = 10
+        soundFX.thrustSound()
+        let radians = shipTrajectoryAngle * .pi / 180 // Convert angle to radians
+        shipAcceleration.x += shipThrust * cos(radians)
+        shipAcceleration.y += shipThrust * sin(radians)
+
+    }
+    
+    func moveShip(){
+        shipPos.x += shipVelocity.x * 0.6
+        shipPos.y += shipVelocity.y * 0.6
+        
+        shipVelocity.x += shipAcceleration.x * 0.6
+        shipVelocity.y += shipAcceleration.y * 0.6
+        
+        shipAcceleration = CGPoint()
+        
+        if shipPos.x < -20 {
+            shipPos.x = UIScreen.main.bounds.width + 20
+        }
+        else if shipPos.x > UIScreen.main.bounds.width + 20 {
+            shipPos.x = -20
+        }
+        else if shipPos.y < -20 {
+            shipPos.y = UIScreen.main.bounds.height - 300
+        }
+        else if shipPos.y > UIScreen.main.bounds.height - 300 {
+            shipPos.y = -20
+        }
+        
+        if isShipThrusting {
+            thrustTimer -= 1
+            if thrustTimer == 0 {
+                stopMovingShip()
+            }
+        }
     }
     
     func stopMovingShip(){
-        shipMoving = false
+        isShipThrusting = false
     }
     
     func rotateShipRight() {
@@ -97,6 +151,21 @@ class GameManager: ObservableObject {
     func fireBullet(){
         bulletArray.append(Bullet(position: shipPos, angle: shipAngle, velocity: 6.0))
         soundFX.fireSound()
+    }
+    
+    func animateExplosions() {
+        if explosionTimer == 4 {
+            explosionTimer = 0
+            var baIndexSet:IndexSet = []
+            for (index,_) in explosionArray.enumerated() {
+                explosionArray[index].frame += 1
+                if explosionArray[index].frame == 4 {
+                    baIndexSet.insert(index)
+                }
+            }
+            explosionArray.remove(atOffsets: baIndexSet)
+        }
+        explosionTimer += 1
     }
     
     ///Todo implement hyperspace handling
@@ -139,22 +208,26 @@ class GameManager: ObservableObject {
             
             bulletArray.remove(atOffsets: baIndexSet)
             for aIndex in astIndexSet {
-                let astHit = asteroidArray[aIndex]
-                asteroidArray.remove(at: aIndex)
-                if astHit.asteroidType == .large {
-                    soundFX.bigHitSound()
-                    asteroidArray.append(Asteroid(position: astHit.position, angle: -astHit.angle, velocity: 1.0, type: .medium,shape: astHit.asteroidShape))
-                    asteroidArray.append(Asteroid(position: astHit.position, angle: astHit.angle, velocity: 1.0, type: .medium,shape: astHit.asteroidShape))
-                    
-                } else if astHit.asteroidType == .medium {
-                    soundFX.mediumHitSound()
-                    asteroidArray.append(Asteroid(position: astHit.position, angle: -astHit.angle, velocity: 1.0, type: .small,shape: astHit.asteroidShape))
-                    asteroidArray.append(Asteroid(position: astHit.position, angle: astHit.angle, velocity: 1.0, type: .small,shape: astHit.asteroidShape))
-                    
-                } else {
-                    soundFX.smallHitSound()
+                if asteroidArray.indices.contains(aIndex)  {
+                    let astHit = asteroidArray[aIndex]
+                    score += astHit.asteroidType.scores()
+                    explosionArray.append(Explosion(position: astHit.position, rotation: astHit.rotation))
+                    print("Explosion added!")
+                    asteroidArray.remove(at: aIndex)
+                    if astHit.asteroidType == .large {
+                        soundFX.bigHitSound()
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: -astHit.angle, velocity: 1.0, type: .medium,shape: astHit.asteroidShape))
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: astHit.angle, velocity: 1.0, type: .medium,shape: astHit.asteroidShape))
+                        
+                    } else if astHit.asteroidType == .medium {
+                        soundFX.mediumHitSound()
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: -astHit.angle, velocity: 1.0, type: .small,shape: astHit.asteroidShape))
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: astHit.angle, velocity: 1.0, type: .small,shape: astHit.asteroidShape))
+                        
+                    } else {
+                        soundFX.smallHitSound()
+                    }
                 }
-                
             }
         }
     }

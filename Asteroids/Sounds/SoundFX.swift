@@ -16,7 +16,7 @@ final class SoundFX {
     var shootAudioPlayer: AVAudioPlayer?
     var motherAudioPlayer: AVAudioPlayer?
     var baseAudioPlayer: AVAudioPlayer?
-    var invaderAudioPlayer: AVAudioPlayer?
+    var thrustAudioPlayer: AVAudioPlayer?
     
     lazy var fireurl = Bundle.main.url(forResource: "fire", withExtension: "wav")
     lazy var bigKillurl = Bundle.main.url(forResource: "bangLarge", withExtension: "wav")
@@ -24,7 +24,7 @@ final class SoundFX {
     lazy var smallKillurl = Bundle.main.url(forResource: "bangSmall", withExtension: "wav")
     lazy var explosionurl = Bundle.main.url(forResource: "fire", withExtension: "wav")
     lazy var ufourl = Bundle.main.url(forResource: "fire", withExtension: "wav")
-    lazy var invurl = Bundle.main.url(forResource: "fire", withExtension: "wav")
+    lazy var thrusturl = Bundle.main.url(forResource: "thrust", withExtension: "wav")
     
     init() {
         do {
@@ -36,7 +36,7 @@ final class SoundFX {
             smallHitAudioPlayer = try AVAudioPlayer(contentsOf: smallKillurl!, fileTypeHint: AVFileType.wav.rawValue)
             baseAudioPlayer = try AVAudioPlayer(contentsOf: explosionurl!, fileTypeHint: AVFileType.wav.rawValue)
             motherAudioPlayer = try AVAudioPlayer(contentsOf: ufourl!, fileTypeHint: AVFileType.wav.rawValue)
-            invaderAudioPlayer = try AVAudioPlayer(contentsOf: invurl!, fileTypeHint: AVFileType.wav.rawValue)
+            thrustAudioPlayer = try AVAudioPlayer(contentsOf: thrusturl!, fileTypeHint: AVFileType.wav.rawValue)
         } catch let error {
             print(error.localizedDescription)
         }
@@ -75,10 +75,10 @@ final class SoundFX {
         Thread.detachNewThreadSelector(#selector(play), toTarget: self, with: motherAudioPlayer)
     }
     
-    func invaderSound()
+    func thrustSound()
     {
-        guard let invaderAudioPlayer = invaderAudioPlayer else { return }
-        Thread.detachNewThreadSelector(#selector(play), toTarget: self, with: invaderAudioPlayer)
+        guard let thrustAudioPlayer = thrustAudioPlayer else { return }
+        Thread.detachNewThreadSelector(#selector(play), toTarget: self, with: thrustAudioPlayer)
     }
     
 }

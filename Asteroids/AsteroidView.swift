@@ -35,6 +35,10 @@ struct AsteroidView: View {
                 .stroke(.white,lineWidth: 1.0)
                 .frame(width: 1,height: 1,alignment: .center)
                 .background(.green)
+            ///Draw a circle to determine the hit size of the asteroid
+//            Circle()
+//            .fill(.blue)
+//            .frame(width: asteroid.asteroidType.hitSize(), height: asteroid.asteroidType.hitSize())
         }.background(.black)
     }
 }
@@ -113,11 +117,11 @@ enum AsteroidType {
     func hitSize() -> Double {
         switch self {
         case .large:
-            return 20.0
+            return 50.0
         case .medium:
-            return 10.0
+            return 25.0
         case .small:
-            return 5.0
+            return 12.0
         }
     }
     

@@ -44,7 +44,7 @@ struct ControlsView: View {
                                 manager.startMovingShip()
                             })
                             .onEnded({_ in
-                                manager.stopMovingShip()
+                               // manager.stopMovingShip()
                             })
                     )
             }
