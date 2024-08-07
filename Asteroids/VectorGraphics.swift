@@ -10,6 +10,8 @@ import SwiftUI
 
 let asteroidSize = 1.0
 let shipSize = 4.0
+let UFOSize = 2.0
+let smallUFOSize = 3.0
 
 ///Ship Vector
 var shipPoints:[CGPoint] = [CGPoint(x: -24, y: -16),CGPoint(x: -24, y: 16),CGPoint(x: -40, y: 32),CGPoint(x: 56, y: 0),CGPoint(x: -40, y: -32)]
@@ -36,6 +38,8 @@ var explosionPoints3:[CGPoint] = [CGPoint(x: -12, y: 0),CGPoint(x: -12, y: -12),
 ///Explosion 4
 var explosionPoints4:[CGPoint] = [CGPoint(x: -10, y: 0),CGPoint(x: -10, y: -10),CGPoint(x: 10, y: -10),CGPoint(x: 15, y: 5),CGPoint(x: 10, y: -5),CGPoint(x: 0, y: 10),CGPoint(x: 5, y: 15),CGPoint(x: -5, y: 15),CGPoint(x: -20, y: -5),CGPoint(x: -15, y: 5)]
 
+///UFO
+var UFOPoints:[CGPoint] = [CGPoint(x: -16, y: 8),CGPoint(x: 16, y: 8),CGPoint(x: 40, y: -8),CGPoint(x: -40, y: -8),CGPoint(x: -16, y: -24),CGPoint(x: 16, y: -24),CGPoint(x: 40, y: -8),CGPoint(x: 16, y: 8),CGPoint(x: 8, y: 24),CGPoint(x: -8, y: 24),CGPoint(x: -16, y: 8),CGPoint(x: -40, y: -8)]
 
 /// Draw the shape
 struct VectorShape: Shape {

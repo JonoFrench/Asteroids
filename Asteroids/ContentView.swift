@@ -28,6 +28,10 @@ struct ContentView: View {
                     GameView()
                         .background(.clear)
                         .zIndex(1.0)
+                } else if manager.gameState == .ended {
+                    GameOverView()
+                        .background(.clear)
+                        .zIndex(1.0)
                 }
                 Spacer()
                 ControlsView()

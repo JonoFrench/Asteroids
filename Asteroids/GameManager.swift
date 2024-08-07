@@ -49,10 +49,16 @@ class GameManager: ObservableObject {
     @Published
     var asteroidArray:[Asteroid] = []
     @Published
-    var explosionArray:[Explosion] = []
+    var explosionArray:[Explosion] = []    
+    @Published
+    var UFObulletArray:[Bullet] = []
+    @Published
+    var UFOArray:[UFO] = []
+
     @Published
     var score = 0
     
+    var level = 0
     
     init() {
         print("init GameManager")
@@ -80,11 +86,32 @@ class GameManager: ObservableObject {
         }
         /// Asteroids
         moveAsteroids()
-        
         ///Explosions
         animateExplosions()
+        ///UFO
+
+        
+        /// Check level complete
+        
+        checkAsteroids()
     }
     
+    func startGame() {
+        
+    }
+ 
+    func nextWave() {
+        
+    }
+    
+    ///Todo next level
+    func checkAsteroids() {
+        if asteroidArray.isEmpty {
+            gameState = .ended
+        }
+    }
+
+    ///Todo here. Add the asteroids at more random positions, plus we need to add more for each wave.
     func addAsteroids() {
         asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 200), angle: 10, velocity: 1.0, type: .large,shape: .ShapeA))
         asteroidArray.append(Asteroid(position: CGPoint(x: 200, y: 300), angle: 100.0, velocity: 1.0, type: .large,shape: .ShapeB))
@@ -103,6 +130,10 @@ class GameManager: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
             isShipThrusting = false
         }
+        /// Bit of haptic feedback helps
+        let generator = UIImpactFeedbackGenerator(style: .soft)
+        generator.impactOccurred()
+
     }
     
     func moveShip(){
@@ -145,9 +176,13 @@ class GameManager: ObservableObject {
             shipAngle = 360.0
         }
     }
+    
     func fireBullet(){
         bulletArray.append(Bullet(position: shipPos, angle: shipAngle, velocity: 6.0))
         soundFX.fireSound()
+        /// Bit of haptic feedback helps
+        let generator = UIImpactFeedbackGenerator(style: .rigid)
+        generator.impactOccurred()
     }
     
     func animateExplosions() {
@@ -176,7 +211,6 @@ class GameManager: ObservableObject {
             var baIndexSet:IndexSet = []
             for (index,_) in bulletArray.enumerated(){
                 if bulletArray[index].position.x < 0 || bulletArray[index].position.x > UIScreen.main.bounds.width || bulletArray[index].position.y < 0 || bulletArray[index].position.y > UIScreen.main.bounds.height {
-                    //print("remove Bullet")
                     baIndexSet.insert(index)
                 }
             }
@@ -211,6 +245,9 @@ class GameManager: ObservableObject {
                     score += astHit.asteroidType.scores()
                     explosionArray.append(Explosion(position: astHit.position, rotation: astHit.rotation))
                     asteroidArray.remove(at: aIndex)
+                    /// Bit of haptic feedback helps
+                    let generator = UIImpactFeedbackGenerator(style: .heavy)
+                    generator.impactOccurred()
                     if astHit.asteroidType == .large {
                         soundFX.bigHitSound()
                         asteroidArray.append(Asteroid(position: astHit.position, angle: -astHit.angle, velocity: 1.0, type: .medium,shape: astHit.asteroidShape))
@@ -250,22 +287,15 @@ class GameManager: ObservableObject {
             for (index,_) in asteroidArray.enumerated(){
                 if asteroidArray[index].position.x < -20 {
                     asteroidArray[index].position.x = UIScreen.main.bounds.width + 20
-                    //print("Asteroid x < 0")
                 }
                 if asteroidArray[index].position.x > UIScreen.main.bounds.width + 20 {
                     asteroidArray[index].position.x = -20
-                    //print("Asteroid x > width")
                 }
-                
                 if asteroidArray[index].position.y < -20 {
                     asteroidArray[index].position.y = UIScreen.main.bounds.height - 300
-                    //print("Asteroid y < 0")
                 }
-                
                 if asteroidArray[index].position.y > UIScreen.main.bounds.height - 300 {
-                    // print("Asteroid y > height at \(asteroidArray[index].position.y)")
                     asteroidArray[index].position.y = -20
-                    //print("Asteroid y > height")
                 }
             }
             
