@@ -19,6 +19,9 @@
 		34A328112C61811C0092B175 /* bangSmall.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328072C61811C0092B175 /* bangSmall.wav */; };
 		34A328162C6184D90092B175 /* SoundFX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328152C6184D90092B175 /* SoundFX.swift */; };
 		34A328182C623A2F0092B175 /* ExplosionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328172C623A2F0092B175 /* ExplosionView.swift */; };
+		34A3281E2C63AC4D0092B175 /* EightBit Atari-Ataridbg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34A3281D2C63AC4D0092B175 /* EightBit Atari-Ataridbg.ttf */; };
+		34A328202C63FFBB0092B175 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A3281F2C63FFBB0092B175 /* StartView.swift */; };
+		34A328222C6402FE0092B175 /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328212C6402FE0092B175 /* GameOverView.swift */; };
 		34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */; };
 		34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C342C5F9F0500C2CAAD /* ContentView.swift */; };
 		34B38C372C5F9F0700C2CAAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B38C362C5F9F0700C2CAAD /* Assets.xcassets */; };
@@ -47,6 +50,10 @@
 		34A328072C61811C0092B175 /* bangSmall.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangSmall.wav; sourceTree = "<group>"; };
 		34A328152C6184D90092B175 /* SoundFX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFX.swift; sourceTree = "<group>"; };
 		34A328172C623A2F0092B175 /* ExplosionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplosionView.swift; sourceTree = "<group>"; };
+		34A328192C63A9940092B175 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		34A3281D2C63AC4D0092B175 /* EightBit Atari-Ataridbg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EightBit Atari-Ataridbg.ttf"; sourceTree = "<group>"; };
+		34A3281F2C63FFBB0092B175 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
+		34A328212C6402FE0092B175 /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		34B38C2F2C5F9F0500C2CAAD /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsApp.swift; sourceTree = "<group>"; };
 		34B38C342C5F9F0500C2CAAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -92,6 +99,14 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		34A3281A2C63A9E30092B175 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				34A3281D2C63AC4D0092B175 /* EightBit Atari-Ataridbg.ttf */,
+			);
+			path = font;
+			sourceTree = "<group>";
+		};
 		34B38C262C5F9F0500C2CAAD = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +126,8 @@
 		34B38C312C5F9F0500C2CAAD /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				34A3281A2C63A9E30092B175 /* font */,
+				34A328192C63A9940092B175 /* Info.plist */,
 				34A327FD2C6180FB0092B175 /* Sounds */,
 				34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */,
 				34B38C342C5F9F0500C2CAAD /* ContentView.swift */,
@@ -126,6 +143,8 @@
 				34B38C512C602AD800C2CAAD /* SaucerView.swift */,
 				34B38C532C60F96500C2CAAD /* VectorGraphics.swift */,
 				34A328172C623A2F0092B175 /* ExplosionView.swift */,
+				34A3281F2C63FFBB0092B175 /* StartView.swift */,
+				34A328212C6402FE0092B175 /* GameOverView.swift */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -198,6 +217,7 @@
 			files = (
 				34A3280C2C61811C0092B175 /* extraShip.wav in Resources */,
 				34A3280A2C61811C0092B175 /* bangMedium.wav in Resources */,
+				34A3281E2C63AC4D0092B175 /* EightBit Atari-Ataridbg.ttf in Resources */,
 				34A3280D2C61811C0092B175 /* beat1.wav in Resources */,
 				34B38C3A2C5F9F0700C2CAAD /* Preview Assets.xcassets in Resources */,
 				34A328102C61811C0092B175 /* bangLarge.wav in Resources */,
@@ -228,9 +248,11 @@
 				34B38C432C5F9F4800C2CAAD /* GameView.swift in Sources */,
 				34A328162C6184D90092B175 /* SoundFX.swift in Sources */,
 				34B38C452C5F9F5B00C2CAAD /* ControlsView.swift in Sources */,
+				34A328222C6402FE0092B175 /* GameOverView.swift in Sources */,
 				34B38C4E2C5FDB6800C2CAAD /* BulletView.swift in Sources */,
 				34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */,
 				34B38C502C6027C200C2CAAD /* AsteroidView.swift in Sources */,
+				34A328202C63FFBB0092B175 /* StartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,9 +389,9 @@
 				DEVELOPMENT_TEAM = 9GZ8FVR7LN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Asteroids/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -396,9 +418,9 @@
 				DEVELOPMENT_TEAM = 9GZ8FVR7LN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Asteroids/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

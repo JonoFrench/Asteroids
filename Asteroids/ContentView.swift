@@ -15,16 +15,25 @@ struct ContentView: View {
             VStack {
                 TopView()
                     .frame(width: UIScreen.main.bounds.width,height: 100, alignment: .center)
-                    .background(.black)
+                    //.background(.black)
                     .zIndex(3.0)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [.black,.red,.orange, .red, .black]), startPoint: .top, endPoint: .bottom)
+                    )
                 Spacer()
-                GameView()
-                    .background(.black)
-                    .zIndex(1.0)
+                if manager.gameState == .intro {
+                    StartView()
+                } else if manager.gameState == .playing {
+                    GameView()
+                        .background(.black)
+                        .zIndex(1.0)
+                }
                 Spacer()
                 ControlsView()
                     .frame(width: UIScreen.main.bounds.width,height: 120,alignment: .center)
-                    .background(.black)
+                    .background(
+                        LinearGradient(gradient: Gradient(colors: [.black,.red,.orange, .red, .black]), startPoint: .top, endPoint: .bottom)
+                    )
                     .zIndex(2.0)
             }
         }

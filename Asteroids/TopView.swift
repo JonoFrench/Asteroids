@@ -11,23 +11,33 @@ struct TopView: View {
     @EnvironmentObject var manager: GameManager
     var body: some View {
         VStack {
-            Text("SwiftUI Asteroids")
-                .foregroundStyle(.white)
-                .font(.headline)
             HStack {
+                Spacer()
                 Text("Lives: 3")
                     .foregroundStyle(.white)
-                    .font(.headline)
-
-                Text("Score: ")
-                    .foregroundStyle(.white)
-                    .font(.headline)
-                Text(String(format: "%06d", manager.score))
-                    .foregroundStyle(.white)
+                    .font(.title)
+                    //.font(.custom("EightBit-Atari-Ataridbg", size: 18))
                 Spacer()
+                Text("Score: \(String(format: "%06d", manager.score))")
+                    .foregroundStyle(.white)
+                    .font(.title)
+                    //.font(.custom("EightBit-Atari-Ataridbg", size: 18))
+                    .frame(alignment: .trailing)
+                Spacer()
+            }.onAppear {
+//                print("Hello")
+//                for family: String in UIFont.familyNames
+//                {
+//                    print(family)
+//                    for names: String in UIFont.fontNames(forFamilyName: family)
+//                    {
+//                        print("== \(names)")
+//                    }
+//                }
+                
             }
             
-        }.background(.black)
+        }
     }
 }
 

@@ -9,7 +9,26 @@ import SwiftUI
 
 struct StartView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Spacer()
+            Image("Title")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            Text("In SwiftUI")
+                .foregroundStyle(.white)
+                .font(.title)
+
+            Spacer()
+            Text("Press Fire to Start")
+                .foregroundStyle(.white)
+                .font(.title)
+            Spacer()
+            Text("(c) Jonathan French 2024")
+                .foregroundStyle(.white)
+                .font(.footnote)
+            Spacer()
+
+        }.background(.black)
     }
 }
 

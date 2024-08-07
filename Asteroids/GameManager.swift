@@ -17,22 +17,26 @@ import Foundation
 import QuartzCore
 import SwiftUI
 
+enum GameState {
+    case intro,playing,ended
+}
+
 class GameManager: ObservableObject {
     
     var soundFX:SoundFX = SoundFX()
     @Published
     var lives = 3
     @Published
+    var gameState:GameState = .intro
+    @Published
     var shipAngle = 0.0
     @Published
     var shipTrajectoryAngle = 0.0
-    //var shipSpeed = 0.0
     var shipVelocity = CGPoint(x: 0.0, y: 0.0)
     var shipAcceleration = CGPoint(x: 0.0, y: 0.0)
     var shipThrust = 1.0
     //    ///How often in the game loop we handle the ship moving
     var explosionTimer = 0
-    var thrustTimer = 0
     var shipLeft = false
     var shipRight = false
     //var shipMoving = false
@@ -91,14 +95,14 @@ class GameManager: ObservableObject {
     
     func startMovingShip() {
         shipTrajectoryAngle = shipAngle
-        //shipMoving = true
         isShipThrusting = true
-        thrustTimer = 10
         soundFX.thrustSound()
         let radians = shipTrajectoryAngle * .pi / 180 // Convert angle to radians
         shipAcceleration.x += shipThrust * cos(radians)
         shipAcceleration.y += shipThrust * sin(radians)
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
+            isShipThrusting = false
+        }
     }
     
     func moveShip(){
@@ -121,13 +125,6 @@ class GameManager: ObservableObject {
         }
         else if shipPos.y > UIScreen.main.bounds.height - 300 {
             shipPos.y = -20
-        }
-        
-        if isShipThrusting {
-            thrustTimer -= 1
-            if thrustTimer == 0 {
-                stopMovingShip()
-            }
         }
     }
     
@@ -210,9 +207,9 @@ class GameManager: ObservableObject {
             for aIndex in astIndexSet {
                 if asteroidArray.indices.contains(aIndex)  {
                     let astHit = asteroidArray[aIndex]
+                    ///Update Score and add explosion shrapnel and remove the asteroid
                     score += astHit.asteroidType.scores()
                     explosionArray.append(Explosion(position: astHit.position, rotation: astHit.rotation))
-                    print("Explosion added!")
                     asteroidArray.remove(at: aIndex)
                     if astHit.asteroidType == .large {
                         soundFX.bigHitSound()

@@ -13,7 +13,8 @@ struct ControlsView: View {
         HStack {
             Spacer()
             Circle()
-                .fill(.white)
+                .fill(.red.gradient)
+                .stroke(.white, lineWidth: 2)
                 .frame(width: 100, height: 100)
                 .gesture(
                     DragGesture(minimumDistance: 0)
@@ -27,16 +28,27 @@ struct ControlsView: View {
             Spacer()
             VStack {
                 Circle()
-                    .fill(.red)
+                    .fill(
+                        RadialGradient(gradient: Gradient(colors: [.red, .yellow, .blue, .purple]), center: .center, startRadius: 5, endRadius: 50)
+                    )
+                    .stroke(.white, lineWidth: 2)
                     .frame(width: 100, height: 50)
+                
                     .gesture(
                         TapGesture()
                             .onEnded({
-                                manager.fireBullet()
+                                if manager.gameState == .intro {
+                                    manager.gameState = .playing
+                                } else {
+                                    manager.fireBullet()
+                                }
                             })
                     )
                 Circle()
-                    .fill(.white)
+                    .fill(
+                        RadialGradient(gradient: Gradient(colors: [.black,.gray, .white]), center: .center, startRadius: 5, endRadius: 50)
+                    )
+                    .stroke(.white, lineWidth: 2)
                     .frame(width: 100, height: 50)
                     .gesture(
                         DragGesture(minimumDistance: 0)
@@ -44,13 +56,14 @@ struct ControlsView: View {
                                 manager.startMovingShip()
                             })
                             .onEnded({_ in
-                               // manager.stopMovingShip()
+                                manager.stopMovingShip()
                             })
                     )
             }
             Spacer()
             Circle()
-                .fill(.white)
+                .fill(.red.gradient)
+                .stroke(.white, lineWidth: 2)
                 .frame(width: 100, height: 100)
                 .gesture(
                     DragGesture(minimumDistance: 0)
@@ -62,8 +75,9 @@ struct ControlsView: View {
                         })
                 )
             Spacer()
-        }.background(.green)
-        //._fill()
+        }//.background(
+//            LinearGradient(gradient: Gradient(colors: [.black, .red, .black]), startPoint: .top, endPoint: .bottom)
+//        )
     }
 }
 
