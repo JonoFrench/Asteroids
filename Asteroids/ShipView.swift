@@ -31,7 +31,7 @@ struct ShipView: View {
             if manager.isShipThrusting {
                 VectorShape(points: rotatedThrustPoints)
                     .fill(.black)
-                    .stroke(.white,lineWidth: 1.0)
+                    .stroke(.red,lineWidth: 1.0)
                     .frame(width: 1,height: 1,alignment: .center)
                     .background(.black)
             }

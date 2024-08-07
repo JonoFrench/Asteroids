@@ -4,7 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>EightBit Atari-Ataridbg.ttf</string>
+		<string>Hyperspace.otf</string>
+		<string>Hyperspace Bold.otf</string>
 	</array>
 	<key>UILaunchScreen</key>
 	<dict>

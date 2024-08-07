@@ -18,24 +18,30 @@ struct ContentView: View {
                     //.background(.black)
                     .zIndex(3.0)
                     .background(
-                        LinearGradient(gradient: Gradient(colors: [.black,.red,.orange, .red, .black]), startPoint: .top, endPoint: .bottom)
+                        LinearGradient(gradient: Gradient(colors: [.clear,.red,.orange, .red, .clear]), startPoint: .top, endPoint: .bottom)
                     )
                 Spacer()
                 if manager.gameState == .intro {
                     StartView()
+                        .background(.clear)
                 } else if manager.gameState == .playing {
                     GameView()
-                        .background(.black)
+                        .background(.clear)
                         .zIndex(1.0)
                 }
                 Spacer()
                 ControlsView()
                     .frame(width: UIScreen.main.bounds.width,height: 120,alignment: .center)
                     .background(
-                        LinearGradient(gradient: Gradient(colors: [.black,.red,.orange, .red, .black]), startPoint: .top, endPoint: .bottom)
+                        LinearGradient(gradient: Gradient(colors: [.clear,.red,.orange, .red, .clear]), startPoint: .top, endPoint: .bottom)
                     )
                     .zIndex(2.0)
-            }
+            }.background(
+                Image("Background")
+                    .resizable()
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+            )
         }
     }
 }

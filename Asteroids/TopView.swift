@@ -15,25 +15,23 @@ struct TopView: View {
                 Spacer()
                 Text("Lives: 3")
                     .foregroundStyle(.white)
-                    .font(.title)
-                    //.font(.custom("EightBit-Atari-Ataridbg", size: 18))
+                    .font(.custom("Hyperspace-Bold", size: 24))
                 Spacer()
                 Text("Score: \(String(format: "%06d", manager.score))")
                     .foregroundStyle(.white)
-                    .font(.title)
-                    //.font(.custom("EightBit-Atari-Ataridbg", size: 18))
+                    .font(.custom("Hyperspace-Bold", size: 24))
                     .frame(alignment: .trailing)
                 Spacer()
             }.onAppear {
-//                print("Hello")
-//                for family: String in UIFont.familyNames
-//                {
-//                    print(family)
-//                    for names: String in UIFont.fontNames(forFamilyName: family)
-//                    {
-//                        print("== \(names)")
-//                    }
-//                }
+                print("Hello")
+                for family: String in UIFont.familyNames
+                {
+                    print(family)
+                    for names: String in UIFont.fontNames(forFamilyName: family)
+                    {
+                        print("== \(names)")
+                    }
+                }
                 
             }
             
