@@ -19,10 +19,14 @@ struct ControlsView: View {
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({_ in
-                            manager.shipLeft = true
+                            if manager.gameState == .playing {
+                                manager.shipLeft = true
+                            }
                         })
                         .onEnded({_ in
-                            manager.shipLeft = false
+                            if manager.gameState == .playing {
+                                manager.shipLeft = false
+                            }
                         })
                 )
             Spacer()
@@ -38,9 +42,11 @@ struct ControlsView: View {
                         TapGesture()
                             .onEnded({
                                 if manager.gameState == .intro {
-                                    manager.gameState = .playing
-                                } else {
+                                    manager.startGame()
+                                } else if manager.gameState == .playing {
                                     manager.fireBullet()
+                                } else if manager.gameState == .ended {
+                                    manager.gameState = .intro
                                 }
                             })
                     )
@@ -53,7 +59,9 @@ struct ControlsView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged({_ in
-                                manager.startMovingShip()
+                                if manager.gameState == .playing {
+                                    manager.startMovingShip()
+                                }
                             })
                             .onEnded({_ in
                                 manager.stopMovingShip()
@@ -68,16 +76,18 @@ struct ControlsView: View {
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({_ in
-                            manager.shipRight = true
+                            if manager.gameState == .playing {
+                                manager.shipRight = true
+                            }
                         })
                         .onEnded({_ in
-                            manager.shipRight = false
+                            if manager.gameState == .playing {
+                                manager.shipRight = false
+                            }
                         })
                 )
             Spacer()
-        }//.background(
-//            LinearGradient(gradient: Gradient(colors: [.black, .red, .black]), startPoint: .top, endPoint: .bottom)
-//        )
+        }
     }
 }
 

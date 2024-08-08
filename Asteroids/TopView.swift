@@ -12,29 +12,18 @@ struct TopView: View {
     var body: some View {
         VStack {
             HStack {
-                Spacer()
-                Text("Lives: 3")
-                    .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 24))
-                Spacer()
-                Text("Score: \(String(format: "%06d", manager.score))")
-                    .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 24))
-                    .frame(alignment: .trailing)
-                Spacer()
-            }.onAppear {
-                print("Hello")
-                for family: String in UIFont.familyNames
+                HStack(alignment:.firstTextBaseline ,content:
                 {
-                    print(family)
-                    for names: String in UIFont.fontNames(forFamilyName: family)
-                    {
-                        print("== \(names)")
+                    ForEach(0..<manager.lives, id: \.self) {_ in
+                        ShipLifeView().padding([.leading])
                     }
-                }
-                
+                })
+                Spacer()
+                Text("Score:\(String(format: "%06d", manager.score))")
+                    .foregroundStyle(.white)
+                    .font(.custom("Hyperspace-Bold", size: 24))
+                    .padding([.trailing])
             }
-            
         }
     }
 }

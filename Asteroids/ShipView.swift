@@ -15,7 +15,6 @@ let sizedThrustPoints:[CGPoint] = shipThrustPoints.map { point in
     CGPoint(x: point.x / shipSize, y: point.y / shipSize)
 }
 
-
 struct ShipView: View {
     @EnvironmentObject var manager: GameManager
 
@@ -31,7 +30,7 @@ struct ShipView: View {
             if manager.isShipThrusting {
                 VectorShape(points: rotatedThrustPoints)
                     .fill(.black)
-                    .stroke(.red,lineWidth: 1.0)
+                    .stroke(.white,lineWidth: 1.0)
                     .frame(width: 1,height: 1,alignment: .center)
                     .background(.black)
             }

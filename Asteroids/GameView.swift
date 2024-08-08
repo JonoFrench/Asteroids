@@ -11,8 +11,17 @@ struct GameView: View {
     @EnvironmentObject var manager: GameManager
     var body: some View {
         ZStack {
-            ShipView()
-                .position(x:manager.shipPos.x,y:manager.shipPos.y)
+            if !manager.shipExploding {
+                ShipView()
+                    .position(x:manager.shipPos.x,y:manager.shipPos.y)
+            } else {
+                ExplodeShip(explodingBits: manager.shipExpA!)
+                    .position(x:manager.shipExpA!.position.x,y:manager.shipExpA!.position.y)
+                ExplodeShip(explodingBits: manager.shipExpB!)
+                    .position(x:manager.shipExpB!.position.x,y:manager.shipExpB!.position.y)
+                ExplodeShip(explodingBits: manager.shipExpC!)
+                    .position(x:manager.shipExpC!.position.x,y:manager.shipExpC!.position.y)
+            }
             ForEach(manager.bulletArray, id: \.id) { bullet in
                 BulletView()
                     .position(bullet.position)
@@ -29,7 +38,6 @@ struct GameView: View {
         }
     }
 }
-
 
 #Preview {
     let previewEnvObject = GameManager()

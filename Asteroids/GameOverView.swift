@@ -9,7 +9,12 @@ import SwiftUI
 
 struct GameOverView: View {
     var body: some View {
+        Spacer()
         Text("GameOver")
+            .foregroundStyle(.white)
+            .font(.custom("Hyperspace-Bold", size: 36))
+        Spacer()
+        Text("Press Fire")
             .foregroundStyle(.white)
             .font(.custom("Hyperspace-Bold", size: 36))
     }

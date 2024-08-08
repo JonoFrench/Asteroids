@@ -14,7 +14,6 @@ struct BulletView: View {
             Circle()
                 .fill(.white)
                 .frame(width: 2, height: 2)
-
         }.background(.clear)
             .zIndex(0.1)
     }

@@ -17,7 +17,6 @@ struct StartView: View {
             Text("In SwiftUI")
                 .foregroundStyle(.white)
                 .font(.custom("Hyperspace-Bold", size: 36))
-
             Spacer()
             Text("Press Fire to Start")
                 .foregroundStyle(.red)
@@ -31,7 +30,6 @@ struct StartView: View {
                 .foregroundStyle(.white)
                 .font(.custom("Hyperspace-Bold", size: 18))
             Spacer()
-
         }.background(.clear)
     }
 }

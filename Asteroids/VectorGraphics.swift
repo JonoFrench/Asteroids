@@ -16,6 +16,9 @@ let smallUFOSize = 3.0
 ///Ship Vector
 var shipPoints:[CGPoint] = [CGPoint(x: -24, y: -16),CGPoint(x: -24, y: 16),CGPoint(x: -40, y: 32),CGPoint(x: 56, y: 0),CGPoint(x: -40, y: -32)]
 var shipThrustPoints:[CGPoint] = [CGPoint(x: -24, y: -16),CGPoint(x: -56, y: 0),CGPoint(x: -24, y: 16)]
+var shipPartA:[CGPoint] = [CGPoint(x: -40, y: -32),CGPoint(x: -24, y: -16),CGPoint(x: -24, y: 16),CGPoint(x: -40, y: 32)]
+var shipPartB:[CGPoint] = [CGPoint(x: -40, y: 32),CGPoint(x: 56, y: 0)]
+var shipPartC:[CGPoint] = [CGPoint(x: -40, y: -32),CGPoint(x: 56, y: 0)]
 
 ///Asteroid 1
 var largeAsteroidPoints1:[CGPoint] = [CGPoint(x: 0, y: 16),CGPoint(x: 16, y: 32),CGPoint(x: 32, y: 16),CGPoint(x: 24, y: 0),CGPoint(x: 32, y: -16),CGPoint(x: 8, y: -32),CGPoint(x: -16, y: -32),CGPoint(x: -32, y: -16),CGPoint(x: -32, y: 16),CGPoint(x: -16, y: 32)]
@@ -28,13 +31,10 @@ var largeAsteroidPoints4:[CGPoint] = [CGPoint(x: 8, y: 0),CGPoint(x: 32, y: 8),C
 
 ///Explosion 1
 var explosionPoints1:[CGPoint] = [CGPoint(x: -16, y: 0),CGPoint(x: -16, y: -16),CGPoint(x: 16, y: -16),CGPoint(x: 24, y: 8),CGPoint(x: 16, y: -8),CGPoint(x: 0, y: 16),CGPoint(x: 8, y: 24),CGPoint(x: -8, y: 24),CGPoint(x: -32, y: -8),CGPoint(x: -24, y: 8)]
-
 ///Explosion 2
 var explosionPoints2:[CGPoint] = [CGPoint(x: -14, y: 0),CGPoint(x: -14, y: -14),CGPoint(x: 14, y: -14),CGPoint(x: 21, y: 7),CGPoint(x: 14, y: -7),CGPoint(x: 0, y: 14),CGPoint(x: 7, y: 21),CGPoint(x: -7, y: 21),CGPoint(x: -28, y: -7),CGPoint(x: -21, y: 7)]
-
 ///Explosion 3
 var explosionPoints3:[CGPoint] = [CGPoint(x: -12, y: 0),CGPoint(x: -12, y: -12),CGPoint(x: 12, y: -12),CGPoint(x: 18, y: 6),CGPoint(x: 12, y: -6),CGPoint(x: 0, y: 12),CGPoint(x: 6, y: 18),CGPoint(x: -6, y: 18),CGPoint(x: -24, y: -6),CGPoint(x: -18, y: 6)]
-
 ///Explosion 4
 var explosionPoints4:[CGPoint] = [CGPoint(x: -10, y: 0),CGPoint(x: -10, y: -10),CGPoint(x: 10, y: -10),CGPoint(x: 15, y: 5),CGPoint(x: 10, y: -5),CGPoint(x: 0, y: 10),CGPoint(x: 5, y: 15),CGPoint(x: -5, y: 15),CGPoint(x: -20, y: -5),CGPoint(x: -15, y: 5)]
 
@@ -56,6 +56,21 @@ struct VectorShape: Shape {
         return path
     }
 }
+
+/// Draw the line
+struct VectorLine: Shape {
+    var points: [CGPoint]
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        if let firstPoint = points.first {
+            path.move(to: firstPoint)
+            for point in points.dropFirst() {
+                path.addLine(to: point)
+            }
+        }
+        return path
+    }
+}
 /// Rotate the shape
 func rotatePoints(_ points: [CGPoint], byDegrees angle: CGFloat) -> [CGPoint] {
     let radians = angle * .pi / 180 // Convert angle to radians
@@ -69,15 +84,23 @@ func rotatePoints(_ points: [CGPoint], byDegrees angle: CGFloat) -> [CGPoint] {
     }
 }
 
-/// Rotate the shape
-//func rotatePoints(_ points: ExplosionPoints, byDegrees angle: CGFloat) -> ExplosionPoints {
-//    let radians = angle * .pi / 180 // Convert angle to radians
-//    let cosAngle = cos(radians)
-//    let sinAngle = sin(radians)
-//    
-//    return points.map { point in
-//        let newX = point.x * cosAngle - point.y * sinAngle
-//        let newY = point.x * sinAngle + point.y * cosAngle
-//        return CGPoint(x: newX, y: newY)
-//    }
-//}
+func isPointWithinCircle(center: CGPoint, diameter: CGFloat, point: CGPoint) -> Bool {
+     let radius = diameter / 2
+     let distanceX = point.x - center.x
+     let distanceY = point.y - center.y
+     let distanceSquared = distanceX * distanceX + distanceY * distanceY
+     let radiusSquared = radius * radius
+     return distanceSquared <= radiusSquared
+ }
+
+func adjustAngle(initialAngle: CGFloat, adjustment: CGFloat, add: Bool = true) -> CGFloat {
+    var newAngle = add ? initialAngle + adjustment : initialAngle - adjustment
+    
+    // Normalize the angle to be within 0 to 360 degrees
+    newAngle = newAngle.truncatingRemainder(dividingBy: 360)
+    if newAngle < 0 {
+        newAngle += 360
+    }
+    
+    return newAngle
+}

@@ -13,11 +13,9 @@ struct ExplosionView: View {
     var body: some View {
         let rotatedPoints = rotatePoints(explosion.points[explosion.frame].points, byDegrees: explosion.rotation)
         ZStack {
-            //Text("Hello")
             Circle()
                 .fill(.white)
                 .frame(width: 2, height: 2)
-                //.position(x: 100,y: 100)
                 .position(x: rotatedPoints[0].x,y: rotatedPoints[0].y)
             Circle()
                 .fill(.white)
@@ -73,7 +71,6 @@ struct Explosion:Identifiable {
         self.frame = frame
         self.rotation = rotation
     }
-    
 }
 
 struct ExplosionPoints:Identifiable {

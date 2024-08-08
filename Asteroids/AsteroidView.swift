@@ -23,7 +23,6 @@ let sizedAsteroidPoints4:[CGPoint] = largeAsteroidPoints4.map { point in
     CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
 }
 
-
 struct AsteroidView: View {
     @EnvironmentObject var manager: GameManager
     var asteroid:Asteroid
@@ -64,20 +63,8 @@ struct Asteroid:Identifiable {
     }
     
     func checkHit(bulletPos:CGPoint) -> Bool {
-        let aSize = asteroidType.hitSize()
-        
-        if bulletPos.x > position.x - aSize && bulletPos.x < position.x + aSize {
-            ///Hit on the X
-            if bulletPos.y > position.y - aSize && bulletPos.y < position.y + aSize {
-            /// Hit on the X & Y
-                print("Hit!!!!")
-                return true
-            }
-        }
-        
-        return false
+        return isPointWithinCircle(center: position, diameter: asteroidType.hitSize(), point: bulletPos)
     }
-    
 }
 
 enum AsteroidShape {
@@ -117,13 +104,25 @@ enum AsteroidType {
     func hitSize() -> Double {
         switch self {
         case .large:
-            return 50.0
+            return 70.0
         case .medium:
-            return 25.0
+            return 40.0
         case .small:
-            return 12.0
+            return 20.0
         }
     }
+    
+    func Speed() -> Double {
+        switch self {
+        case .large:
+            return 10.0
+        case .medium:
+            return 12.0
+        case .small:
+            return 14.0
+        }
+    }
+
     
     func size() -> Double {
         switch self {
