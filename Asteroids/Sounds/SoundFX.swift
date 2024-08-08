@@ -54,7 +54,7 @@ final class SoundFX {
     @objc func play(audioPlayer:AVAudioPlayer){
         audioPlayer.play()
     }
-    
+        
     func beat1Sound(){
         guard let beat1AudioPlayer = beat1AudioPlayer else { return }
         Thread.detachNewThreadSelector(#selector(play), toTarget: self, with: beat1AudioPlayer)

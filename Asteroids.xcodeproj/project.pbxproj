@@ -25,7 +25,7 @@
 		34A328282C641C040092B175 /* Hyperspace Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 34A328242C641C040092B175 /* Hyperspace Bold.otf */; };
 		34A3282C2C64C3CD0092B175 /* LevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A3282B2C64C3CD0092B175 /* LevelView.swift */; };
 		34A3282E2C64D4840092B175 /* ShipLifeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A3282D2C64D4840092B175 /* ShipLifeView.swift */; };
-		34A328302C64ED6B0092B175 /* ExplodeShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A3282F2C64ED6B0092B175 /* ExplodeShip.swift */; };
+		34A328302C64ED6B0092B175 /* ExplodeShipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A3282F2C64ED6B0092B175 /* ExplodeShipView.swift */; };
 		34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */; };
 		34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C342C5F9F0500C2CAAD /* ContentView.swift */; };
 		34B38C372C5F9F0700C2CAAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B38C362C5F9F0700C2CAAD /* Assets.xcassets */; };
@@ -61,7 +61,7 @@
 		34A328242C641C040092B175 /* Hyperspace Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hyperspace Bold.otf"; sourceTree = "<group>"; };
 		34A3282B2C64C3CD0092B175 /* LevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelView.swift; sourceTree = "<group>"; };
 		34A3282D2C64D4840092B175 /* ShipLifeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShipLifeView.swift; sourceTree = "<group>"; };
-		34A3282F2C64ED6B0092B175 /* ExplodeShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplodeShip.swift; sourceTree = "<group>"; };
+		34A3282F2C64ED6B0092B175 /* ExplodeShipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplodeShipView.swift; sourceTree = "<group>"; };
 		34B38C2F2C5F9F0500C2CAAD /* Asteroids.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Asteroids.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidsApp.swift; sourceTree = "<group>"; };
 		34B38C342C5F9F0500C2CAAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -116,6 +116,27 @@
 			path = font;
 			sourceTree = "<group>";
 		};
+		34A328312C6525570092B175 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				34B38C342C5F9F0500C2CAAD /* ContentView.swift */,
+				34B38C402C5F9F3600C2CAAD /* TopView.swift */,
+				34B38C442C5F9F5B00C2CAAD /* ControlsView.swift */,
+				34B38C422C5F9F4800C2CAAD /* GameView.swift */,
+				34B38C462C5FA6EE00C2CAAD /* ShipView.swift */,
+				34B38C4D2C5FDB6800C2CAAD /* BulletView.swift */,
+				34B38C4F2C6027C200C2CAAD /* AsteroidView.swift */,
+				34B38C512C602AD800C2CAAD /* SaucerView.swift */,
+				34A328172C623A2F0092B175 /* ExplosionView.swift */,
+				34A3281F2C63FFBB0092B175 /* StartView.swift */,
+				34A328212C6402FE0092B175 /* GameOverView.swift */,
+				34A3282B2C64C3CD0092B175 /* LevelView.swift */,
+				34A3282D2C64D4840092B175 /* ShipLifeView.swift */,
+				34A3282F2C64ED6B0092B175 /* ExplodeShipView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		34B38C262C5F9F0500C2CAAD = {
 			isa = PBXGroup;
 			children = (
@@ -135,28 +156,15 @@
 		34B38C312C5F9F0500C2CAAD /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				34A328312C6525570092B175 /* Views */,
 				34A3281A2C63A9E30092B175 /* font */,
 				34A328192C63A9940092B175 /* Info.plist */,
 				34A327FD2C6180FB0092B175 /* Sounds */,
 				34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */,
-				34B38C342C5F9F0500C2CAAD /* ContentView.swift */,
 				34B38C362C5F9F0700C2CAAD /* Assets.xcassets */,
 				34B38C382C5F9F0700C2CAAD /* Preview Content */,
-				34B38C402C5F9F3600C2CAAD /* TopView.swift */,
-				34B38C422C5F9F4800C2CAAD /* GameView.swift */,
-				34B38C442C5F9F5B00C2CAAD /* ControlsView.swift */,
-				34B38C462C5FA6EE00C2CAAD /* ShipView.swift */,
 				34B38C482C5FB9B200C2CAAD /* GameManager.swift */,
-				34B38C4D2C5FDB6800C2CAAD /* BulletView.swift */,
-				34B38C4F2C6027C200C2CAAD /* AsteroidView.swift */,
-				34B38C512C602AD800C2CAAD /* SaucerView.swift */,
 				34B38C532C60F96500C2CAAD /* VectorGraphics.swift */,
-				34A328172C623A2F0092B175 /* ExplosionView.swift */,
-				34A3281F2C63FFBB0092B175 /* StartView.swift */,
-				34A328212C6402FE0092B175 /* GameOverView.swift */,
-				34A3282B2C64C3CD0092B175 /* LevelView.swift */,
-				34A3282D2C64D4840092B175 /* ShipLifeView.swift */,
-				34A3282F2C64ED6B0092B175 /* ExplodeShip.swift */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -268,7 +276,7 @@
 				34A3282C2C64C3CD0092B175 /* LevelView.swift in Sources */,
 				34B38C502C6027C200C2CAAD /* AsteroidView.swift in Sources */,
 				34A328202C63FFBB0092B175 /* StartView.swift in Sources */,
-				34A328302C64ED6B0092B175 /* ExplodeShip.swift in Sources */,
+				34A328302C64ED6B0092B175 /* ExplodeShipView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -93,6 +93,19 @@ func isPointWithinCircle(center: CGPoint, diameter: CGFloat, point: CGPoint) -> 
      return distanceSquared <= radiusSquared
  }
 
+func circlesIntersect(center1: CGPoint, diameter1: CGFloat, center2: CGPoint, diameter2: CGFloat) -> Bool {
+    let radius1 = diameter1 / 2
+    let radius2 = diameter2 / 2
+
+    let distanceX = center2.x - center1.x
+    let distanceY = center2.y - center1.y
+    let distanceSquared = distanceX * distanceX + distanceY * distanceY
+    let radiusSum = radius1 + radius2
+    let radiusSumSquared = radiusSum * radiusSum
+
+    return distanceSquared <= radiusSumSquared
+}
+
 func adjustAngle(initialAngle: CGFloat, adjustment: CGFloat, add: Bool = true) -> CGFloat {
     var newAngle = add ? initialAngle + adjustment : initialAngle - adjustment
     

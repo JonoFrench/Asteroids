@@ -19,7 +19,7 @@ let sizedExpPointsC:[CGPoint] = shipPartC.map { point in
     CGPoint(x: point.x / shipSize, y: point.y / shipSize)
 }
 
-struct ExplodeShip: View {
+struct ExplodeShipView: View {
     @EnvironmentObject var manager: GameManager
     var explodingBits:ShipExplodingStruc
     var body: some View {
@@ -48,6 +48,6 @@ struct ShipExplodingStruc:Identifiable {
 
 #Preview {
     let previewEnvObject = GameManager()
-    return ExplodeShip(explodingBits: ShipExplodingStruc(position: CGPoint(), points: sizedExpPointsA,angle: 0.0))
+    return ExplodeShipView(explodingBits: ShipExplodingStruc(position: CGPoint(), points: sizedExpPointsA,angle: 0.0))
         .environmentObject(previewEnvObject)
 }

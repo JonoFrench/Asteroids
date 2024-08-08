@@ -15,11 +15,11 @@ struct GameView: View {
                 ShipView()
                     .position(x:manager.shipPos.x,y:manager.shipPos.y)
             } else {
-                ExplodeShip(explodingBits: manager.shipExpA!)
+                ExplodeShipView(explodingBits: manager.shipExpA!)
                     .position(x:manager.shipExpA!.position.x,y:manager.shipExpA!.position.y)
-                ExplodeShip(explodingBits: manager.shipExpB!)
+                ExplodeShipView(explodingBits: manager.shipExpB!)
                     .position(x:manager.shipExpB!.position.x,y:manager.shipExpB!.position.y)
-                ExplodeShip(explodingBits: manager.shipExpC!)
+                ExplodeShipView(explodingBits: manager.shipExpC!)
                     .position(x:manager.shipExpC!.position.x,y:manager.shipExpC!.position.y)
             }
             ForEach(manager.bulletArray, id: \.id) { bullet in

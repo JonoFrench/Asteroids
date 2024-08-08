@@ -66,9 +66,9 @@ class GameManager: ObservableObject {
     var score = 0
     var level = 1
     var ufo = false
+    var heartBeat = 0.8
     
     init() {
-        print("init GameManager")
         ///Here we go, lets have a nice DisplayLink to update our model with the screen refresh.
         let displayLink:CADisplayLink = CADisplayLink(target: self, selector: #selector(refreshModel))
         displayLink.add(to: .main, forMode:.common)
@@ -112,8 +112,9 @@ class GameManager: ObservableObject {
     
     func startGame() {
         gameState = .getready
-        lives = 3
+        heartBeat = 0.8
         shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
+        asteroidArray.removeAll()
         addAsteroids()
         shipTrajectoryAngle = 0.0
         shipVelocity = CGPoint(x: 0.0, y: 0.0)
@@ -122,11 +123,26 @@ class GameManager: ObservableObject {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
             gameState = .playing
+            startHeartBeat()
         }
     }
     
+    /// Sound FX of the beating game
+    func startHeartBeat(){
+        if gameState == .playing {
+            DispatchQueue.main.asyncAfter(deadline: .now() + heartBeat) { [self] in
+                soundFX.beat1Sound()
+                DispatchQueue.main.asyncAfter(deadline: .now() + heartBeat) { [self] in
+                    soundFX.beat2Sound()
+                    startHeartBeat()
+                }
+            }
+        }
+    }
+
     func nextWave() {
         level += 1
+        heartBeat = 0.8
         bulletArray.removeAll()
         startGame()
     }
@@ -135,7 +151,8 @@ class GameManager: ObservableObject {
     func checkShip() {
         for asteroid in asteroidArray {
             let aSize = asteroid.asteroidType.hitSize()
-            if isPointWithinCircle(center: asteroid.position, diameter: aSize, point: shipPos) {
+            if circlesIntersect(center1: asteroid.position, diameter1: aSize, center2: shipPos, diameter2: 10.0) {
+            //if isPointWithinCircle(center: asteroid.position, diameter: aSize, point: shipPos) {
                 print("Ship Hit!!!! by \(aSize)")
                 shipExpA = ShipExplodingStruc(position: shipPos, points: sizedExpPointsA,angle: shipAngle)
                 shipExpB = ShipExplodingStruc(position: shipPos, points: sizedExpPointsB,angle: adjustAngle(initialAngle: shipAngle, adjustment: 90))
@@ -156,8 +173,11 @@ class GameManager: ObservableObject {
                         
                         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
                             gameState = .playing
+                            startHeartBeat()
                         }
                     } else {
+                        lives = 3
+                        level = 1
                         gameState = .ended
                     }
                 }
@@ -334,6 +354,7 @@ class GameManager: ObservableObject {
                     let astHit = asteroidArray[aIndex]
                     ///Update Score and add explosion shrapnel and remove the asteroid
                     score += astHit.asteroidType.scores()
+                    heartBeat -= 0.01
                     explosionArray.append(Explosion(position: astHit.position, rotation: astHit.rotation))
                     asteroidArray.remove(at: aIndex)
                     /// Bit of haptic feedback helps
