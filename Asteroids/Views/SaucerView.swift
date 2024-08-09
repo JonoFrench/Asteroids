@@ -60,15 +60,6 @@ enum UFOType {
             return points.map { point in
                 CGPoint(x: point.x / smallUFOSize, y: point.y / smallUFOSize)}
         }
-    
-    
-//    func points() -> [CGPoint] {
-//        switch self {
-//        case .small:
-//            return largeAsteroidPoints1
-//        case .large:
-//            return largeAsteroidPoints2
-//        }
     }
     
     func scores() -> Int {
@@ -79,6 +70,16 @@ enum UFOType {
             return 990
         }
     }
+    
+    func hitSize() -> Double {
+        switch self {
+        case .large:
+            return 50.0
+        case .small:
+            return 25.0
+        }
+    }
+    
 }
 
 #Preview {

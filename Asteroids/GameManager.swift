@@ -51,14 +51,15 @@ class GameManager: ObservableObject {
     @Published
     var explosionArray:[Explosion] = []
     @Published
-    var UFObulletArray:[Bullet] = []
+    var saucerBullet:Bullet?
     @Published
-    var UFOArray:[UFO] = []
-    
+    var saucer:UFO?
+    var hasSaucer = false
+    var hasSaucerBullet = false
     @Published
     var score = 0
+    var nextLifeScore = 10000
     var level = 1
-    var ufo = false
     ///For the background beat. This gets slightly faster the more asteroids you hit
     var heartBeat = 0.8
     
@@ -96,8 +97,17 @@ class GameManager: ObservableObject {
             ///Explosions
             animateExplosions()
             ///UFO
-            
-            
+            if !hasSaucer {
+                addSaucer()
+            } else {
+                moveSaucer()
+                if !hasSaucerBullet {
+                    fireSaucer()
+                }
+            }
+            if hasSaucerBullet {
+                moveSaucerBullet()
+            }
             /// Check level complete
             checkAsteroidsKilled()
             
@@ -112,10 +122,21 @@ class GameManager: ObservableObject {
         }
     }
     
+ 
+    func startNewGame(){
+        score = 0 /// Set to 9500 odd to test extra lives....
+        lives = 3
+        level = 1
+        letterIndex = 0
+        selectedLetter = 0
+        letterArray = ["A","A","A"]
+        hasSaucer = false
+        startGame()
+    }
+    
     func startGame() {
         gameState = .getready
         heartBeat = 0.8
-        score = 0
         shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
         asteroidArray.removeAll()
         addAsteroids()
@@ -142,12 +163,57 @@ class GameManager: ObservableObject {
             }
         }
     }
-
+    
     func nextWave() {
         level += 1
         heartBeat = 0.8
+        saucer = nil
+        hasSaucer = false
         bulletArray.removeAll()
         startGame()
+    }
+    
+    func deadShip(){
+        ///Ooops we've been hit!
+        ///Ship is now displayed as 3 different Vectors that can move their own way...
+        shipExpA = ShipExplodingStruc(position: shipPos, points: sizedExpPointsA,angle: shipAngle)
+        shipExpB = ShipExplodingStruc(position: shipPos, points: sizedExpPointsB,angle: adjustAngle(initialAngle: shipAngle, adjustment: 90))
+        shipExpC = ShipExplodingStruc(position: shipPos, points: sizedExpPointsC,angle: adjustAngle(initialAngle: shipAngle, adjustment: -90))
+        shipExploding = true
+        soundFX.bigHitSound()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+            hasSaucerBullet = false
+            saucerBullet = nil
+            hasSaucer = false
+            saucer = nil
+            shipExploding = false
+            lives -= 1
+            
+            if lives > 0 {
+                gameState = .getready
+                shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
+                shipTrajectoryAngle = 0.0
+                shipVelocity = CGPoint(x: 0.0, y: 0.0)
+                shipAcceleration = CGPoint(x: 0.0, y: 0.0)
+                shipThrust = 1.0
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
+                    gameState = .playing
+                    startHeartBeat()
+                }
+            } else {
+                ///Game over sunshine!
+                ///
+                if hiScores.isNewHiScore(score: score) {
+                    print("New High Score")
+                    gameState = .highscore
+                } else {
+                    lives = 3
+                    level = 1
+                    gameState = .ended
+                }
+            }
+        }
     }
     
     ///Check our ship hasn't been hit by an asteroid
@@ -155,42 +221,27 @@ class GameManager: ObservableObject {
         for asteroid in asteroidArray {
             let aSize = asteroid.asteroidType.hitSize()
             if circlesIntersect(center1: asteroid.position, diameter1: aSize, center2: shipPos, diameter2: 10.0) {
-                ///Ooops we've been hit!
-                ///Ship is now displayed as 3 different Vectors that can move their own way...
-                shipExpA = ShipExplodingStruc(position: shipPos, points: sizedExpPointsA,angle: shipAngle)
-                shipExpB = ShipExplodingStruc(position: shipPos, points: sizedExpPointsB,angle: adjustAngle(initialAngle: shipAngle, adjustment: 90))
-                shipExpC = ShipExplodingStruc(position: shipPos, points: sizedExpPointsC,angle: adjustAngle(initialAngle: shipAngle, adjustment: -90))
-                shipExploding = true
-                soundFX.bigHitSound()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-                    shipExploding = false
-                    lives -= 1
-                    
-                    if lives > 0 {
-                        gameState = .getready
-                        shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
-                        shipTrajectoryAngle = 0.0
-                        shipVelocity = CGPoint(x: 0.0, y: 0.0)
-                        shipAcceleration = CGPoint(x: 0.0, y: 0.0)
-                        shipThrust = 1.0
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
-                            gameState = .playing
-                            startHeartBeat()
-                        }
-                    } else {
-                        ///Game over sunshine!
-                        ///
-                        if hiScores.isNewHiScore(score: score) {
-                            print("New High Score")
-                            gameState = .highscore
-                        } else {
-                            lives = 3
-                            level = 1
-                            gameState = .ended
-                        }
-                    }
+                deadShip()
+            }
+        }
+        if hasSaucer {
+            if let saucerUW = saucer {
+                let aSize = saucerUW.type.hitSize()
+                if circlesIntersect(center1: saucerUW.position, diameter1: aSize, center2: shipPos, diameter2: 10.0) {
+                    deadShip()
+                    explosionArray.append(Explosion(position: saucerUW.position, rotation: 180.0))
+                    saucer = nil
+                    hasSaucer = false
+                    hasSaucerBullet = false
                 }
+            }
+        }
+        
+        if hasSaucerBullet {
+            if isPointWithinCircle(center: shipPos, diameter: 10.0, point: saucerBullet!.position) {
+                deadShip()
+                hasSaucerBullet = false
+                saucerBullet = nil
             }
         }
     }
@@ -225,15 +276,15 @@ class GameManager: ObservableObject {
         let centerX = screenWidth / 2
         let centerY = screenHeight / 2
         let exclusionRadius: CGFloat = 80
-
+        
         var x: CGFloat
         var y: CGFloat
-
+        
         repeat {
             x = CGFloat.random(in: 0..<screenWidth)
             y = CGFloat.random(in: 100..<(screenHeight - 100))
         } while (pow(x - centerX, 2) + pow(y - centerY, 2)) <= pow(exclusionRadius, 2)
-
+        
         return CGPoint(x: x, y: y)
     }
     
@@ -360,6 +411,17 @@ class GameManager: ObservableObject {
         }
     }
     
+    func moveSaucerBullet() {
+        if let saucerBulletUR = saucerBullet {
+            saucerBullet?.position = moveAsset(from: saucerBulletUR.position, atAngle: saucerBulletUR.angle, withDistance: saucerBulletUR.velocity)
+            ///Saucer bullet off screen.
+            if saucerBulletUR.position.x < 0 || saucerBulletUR.position.x > UIScreen.main.bounds.width || saucerBulletUR.position.y < 0 || saucerBulletUR.position.y > UIScreen.main.bounds.height {
+                saucerBullet = nil
+                hasSaucerBullet = false
+            }
+        }
+    }
+    
     func checkBullets(){
         if bulletArray.count > 0 {
             var baIndexSet:IndexSet = []
@@ -370,6 +432,19 @@ class GameManager: ObservableObject {
                     if asteroid.checkHit(bulletPos: bullet.position) {
                         baIndexSet.insert(bulIndex)
                         astIndexSet.insert(index)
+                    }
+                }
+                ///Check bullets hitting saucers
+                if hasSaucer {
+                    if isPointWithinCircle(center: saucer!.position, diameter: (saucer?.type.hitSize())!, point: bullet.position) {
+                        baIndexSet.insert(bulIndex)
+                        addScore(newScore:(saucer?.type.scores())!)
+                        explosionArray.append(Explosion(position: saucer!.position, rotation: 180.0))
+                        saucer = nil
+                        hasSaucer = false
+                        let generator = UIImpactFeedbackGenerator(style: .heavy)
+                        generator.impactOccurred()
+                        soundFX.bigHitSound()
                     }
                 }
             }
@@ -452,12 +527,15 @@ class GameManager: ObservableObject {
     func addScore(newScore:Int) {
         score += newScore
         ///Extra life every 10000 points
-        if score >= 10000 && score % 10000 == 0 {
-                lives += 1
-            }
+        if score >= nextLifeScore {
+            lives += 1
+            nextLifeScore += 10000
+            soundFX.extraShipSound()
+        }
     }
     
     ///Hi Score handling from the ControlsView
+
     func addLetter(){
         letterArray[letterIndex] = hiScores.highScoreLetters[selectedLetter]
     }
@@ -469,7 +547,7 @@ class GameManager: ObservableObject {
         }
         letterArray[letterIndex] = hiScores.highScoreLetters[selectedLetter]
     }
-
+    
     func letterDown() {
         selectedLetter -= 1
         if selectedLetter == -1 {
@@ -486,11 +564,85 @@ class GameManager: ObservableObject {
             hiScores.addScores(score: score, initials: String(letterArray))
             hiScores.getScores()
             gameState = .intro
-            lives = 3
-            ///Tidy up for next time
-            letterIndex = 0
-            selectedLetter = 0
-            letterArray = ["A","A","A"]
         }
     }
+    
+    /// Saucer functions
+    
+    func addSaucer(){
+        if Int.random(in: 0..<300) == 25 {
+            let i = Int.random(in: 0...3)
+            /// one in ten will be small to start with, later levels more so
+            var rndSize = 9 - level
+            if rndSize < 1 {rndSize = 1}
+            let sSize = Int.random(in: 0...rndSize) == 1 ? UFOType.small : UFOType.large
+            if i == 0 {
+                /// Saucer from left edge = 0
+                saucer = UFO(position: CGPoint(x: -20, y: 100),angle: Double.random(in: -45...45),velocity: 1.5, type: sSize)
+            } else if i == 1 {
+                /// Saucer from right edge = 180
+                saucer = UFO(position: CGPoint(x: UIScreen.main.bounds.width + 20, y: 100),angle: Double.random(in: 135...225),velocity: 1.5, type: sSize)
+            } else if i == 2 {
+                /// Saucer from bottom edge = 270
+                saucer = UFO(position: CGPoint(x: Double.random(in: 20...UIScreen.main.bounds.width - 20), y: UIScreen.main.bounds.height - 250),angle: Double.random(in: 250...290),velocity: 1.5, type: sSize)
+            } else {
+                /// Saucer from top edge = 90
+                saucer = UFO(position: CGPoint(x: Double.random(in: 20...UIScreen.main.bounds.width - 20), y: -10),angle: Double.random(in: 45...135),velocity: 1.5, type: sSize)
+            }
+            hasSaucer = true
+            if sSize == .large {
+                startLargeSaucerSound()}
+            else {
+                startSmallSaucerSound()}
+        }
+    }
+    
+    func moveSaucer(){
+        if hasSaucer {
+            let newPos = moveAsset(from: saucer!.position, atAngle: saucer!.angle, withDistance: saucer!.velocity)
+            saucer?.position = newPos
+            if let pos = saucer?.position {
+                if pos.x < -20 || pos.x > UIScreen.main.bounds.width + 20 || pos.y > UIScreen.main.bounds.height - 250 || pos.y < -20 {
+                    saucer = nil
+                    hasSaucer = false
+                }
+            }
+        }
+    }
+    
+    /// Saucer firing bullets
+    func fireSaucer(){
+        if hasSaucer && Int.random(in: 0..<100) == 25  {
+            if let saucerUR = saucer {
+                /// Small saucers have greater accuracy
+                let accuracy = saucerUR.type == .large ? 40.0 : 80.0 + Double(level)
+                saucerBullet = Bullet(position: saucerUR.position, angle: modifiedAngleBetweenPoints(point1: saucerUR.position, point2: shipPos, accuracy: accuracy), velocity: 3.0)
+                //angleBetweenPoints
+                print("Saucer fire")
+                hasSaucerBullet = true
+            }
+        }
+    }
+    
+    /// Sound FX of the Large Saucer
+    func startLargeSaucerSound(){
+        if hasSaucer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [self] in
+                soundFX.bigUFOSound()
+                startLargeSaucerSound()
+            }
+        }
+    }
+    
+    /// Sound FX of the Large Saucer
+    func startSmallSaucerSound(){
+        if hasSaucer {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [self] in
+                soundFX.smallUFOSound()
+                startSmallSaucerSound()
+            }
+        }
+    }
+   
+    
 }

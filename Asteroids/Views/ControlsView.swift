@@ -51,7 +51,7 @@ struct ControlsView: View {
                         TapGesture()
                             .onEnded({
                                 if manager.gameState == .intro {
-                                    manager.startGame()
+                                    manager.startNewGame()
                                 } else if manager.gameState == .playing {
                                     manager.fireBullet()
                                 } else if manager.gameState == .ended {

@@ -34,6 +34,14 @@ struct GameView: View {
                 ExplosionView(explosion: explosion)
                     .position(explosion.position)
             }
+            if manager.hasSaucer {
+                SaucerView(saucer: manager.saucer!)
+                    .position(manager.saucer!.position)
+            }
+            if manager.hasSaucerBullet {
+                BulletView()
+                    .position(manager.saucerBullet!.position)
+            }
 
         }
     }
