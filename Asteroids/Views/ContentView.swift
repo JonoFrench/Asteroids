@@ -21,7 +21,7 @@ struct ContentView: View {
                     )
                 Spacer()
                 if manager.gameState == .intro {
-                    StartView()
+                    IntroView()
                         .background(.clear)
                 } else if manager.gameState == .getready {
                     LevelView()
@@ -33,6 +33,11 @@ struct ContentView: View {
                             .zIndex(1.0)
                 } else if manager.gameState == .ended {
                     GameOverView()
+                        .background(.clear)
+                        .zIndex(1.0)
+                }
+                else if manager.gameState == .highscore {
+                    NewHighScoreView()
                         .background(.clear)
                         .zIndex(1.0)
                 }

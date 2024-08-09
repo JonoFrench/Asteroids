@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-let sizedAsteroidPoints1:[CGPoint] = largeAsteroidPoints1.map { point in
-    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
-}
-
-let sizedAsteroidPoints2:[CGPoint] = largeAsteroidPoints2.map { point in
-    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
-}
-
-let sizedAsteroidPoints3:[CGPoint] = largeAsteroidPoints3.map { point in
-    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
-}
-
-let sizedAsteroidPoints4:[CGPoint] = largeAsteroidPoints4.map { point in
-    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
-}
+//let sizedAsteroidPoints1:[CGPoint] = largeAsteroidPoints1.map { point in
+//    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
+//}
+//
+//let sizedAsteroidPoints2:[CGPoint] = largeAsteroidPoints2.map { point in
+//    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
+//}
+//
+//let sizedAsteroidPoints3:[CGPoint] = largeAsteroidPoints3.map { point in
+//    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
+//}
+//
+//let sizedAsteroidPoints4:[CGPoint] = largeAsteroidPoints4.map { point in
+//    CGPoint(x: point.x / asteroidSize, y: point.y / asteroidSize)
+//}
 
 struct AsteroidView: View {
     @EnvironmentObject var manager: GameManager

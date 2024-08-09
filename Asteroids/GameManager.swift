@@ -6,24 +6,17 @@
 //
 
 
-//LargeAstPnts            = $02     ;20 points for a Large asteroid hit.
-//MedAstPnts              = $05     ;50 points for medium asteroid hit.
-//SmallAstPnts            = $10     ;100 points for a small asteroid hit.
-//LargeScrPnts            = $20     ;200 points for a large saucer hit.
-//SmallScrPnts            = $99     ;990 points for a small saucer hit.
-
-
 import Foundation
 import QuartzCore
 import SwiftUI
 
 enum GameState {
-    case intro,getready,playing,ended
+    case intro,getready,playing,ended,highscore
 }
 
 class GameManager: ObservableObject {
-    
-    var soundFX:SoundFX = SoundFX()
+    let hiScores:AsteroidHighScores = AsteroidHighScores()
+    let soundFX:SoundFX = SoundFX()
     @Published
     var lives = 3
     @Published
@@ -66,7 +59,16 @@ class GameManager: ObservableObject {
     var score = 0
     var level = 1
     var ufo = false
+    ///For the background beat. This gets slightly faster the more asteroids you hit
     var heartBeat = 0.8
+    
+    ///New High Score Handling
+    @Published
+    var letterIndex = 0
+    @Published
+    var letterArray:[Character] = ["A","A","A"]
+    @Published
+    var selectedLetter = 0
     
     init() {
         ///Here we go, lets have a nice DisplayLink to update our model with the screen refresh.
@@ -97,7 +99,7 @@ class GameManager: ObservableObject {
             
             
             /// Check level complete
-            checkAsteroids()
+            checkAsteroidsKilled()
             
             ///Check if anything nasty has happened to our ship
             ///Last to do as it's easy to test if we don't die hahahahaha
@@ -113,6 +115,7 @@ class GameManager: ObservableObject {
     func startGame() {
         gameState = .getready
         heartBeat = 0.8
+        score = 0
         shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
         asteroidArray.removeAll()
         addAsteroids()
@@ -152,8 +155,8 @@ class GameManager: ObservableObject {
         for asteroid in asteroidArray {
             let aSize = asteroid.asteroidType.hitSize()
             if circlesIntersect(center1: asteroid.position, diameter1: aSize, center2: shipPos, diameter2: 10.0) {
-            //if isPointWithinCircle(center: asteroid.position, diameter: aSize, point: shipPos) {
-                print("Ship Hit!!!! by \(aSize)")
+                ///Ooops we've been hit!
+                ///Ship is now displayed as 3 different Vectors that can move their own way...
                 shipExpA = ShipExplodingStruc(position: shipPos, points: sizedExpPointsA,angle: shipAngle)
                 shipExpB = ShipExplodingStruc(position: shipPos, points: sizedExpPointsB,angle: adjustAngle(initialAngle: shipAngle, adjustment: 90))
                 shipExpC = ShipExplodingStruc(position: shipPos, points: sizedExpPointsC,angle: adjustAngle(initialAngle: shipAngle, adjustment: -90))
@@ -176,17 +179,24 @@ class GameManager: ObservableObject {
                             startHeartBeat()
                         }
                     } else {
-                        lives = 3
-                        level = 1
-                        gameState = .ended
+                        ///Game over sunshine!
+                        ///
+                        if hiScores.isNewHiScore(score: score) {
+                            print("New High Score")
+                            gameState = .highscore
+                        } else {
+                            lives = 3
+                            level = 1
+                            gameState = .ended
+                        }
                     }
                 }
             }
         }
     }
     
-    ///Todo next level
-    func checkAsteroids() {
+    /// If we have no asteroids left then it's next level. We give a short pause for sanity.
+    func checkAsteroidsKilled() {
         if gameState == .playing && asteroidArray.isEmpty && !shortPause && !shipExploding {
             shortPause = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [self] in
@@ -199,22 +209,36 @@ class GameManager: ObservableObject {
     /// Add the asteroids at more random positions, plus we need to add more for each wave.
     func addAsteroids() {
         for _ in (0...2+level) {
-            asteroidArray.append(Asteroid(position: randomPoint(), angle: randomAngle(), velocity: 1.0, type: .large,shape: randomShape()))
+            asteroidArray.append(Asteroid(position: randomAsteroidPoint(), angle: randomAsteroidAngle(), velocity: 1.0, type: .large,shape: randomAsteroidShape()))
         }
     }
     
-    func randomAngle() -> Double {
+    /// Does what it says on the tin.
+    func randomAsteroidAngle() -> Double {
         return Double(Int.random(in: 0..<360))
     }
     
-    func randomPoint() -> CGPoint {
-        ///Todo make sure our point isn't on the ship though
-        let x = Int.random(in: 0..<Int(UIScreen.main.bounds.width))
-        let y = Int.random(in: 100..<Int(UIScreen.main.bounds.height)-100)
-        return CGPoint(x: Double(x), y: Double(y))
+    /// Make sure our point isn't on the ship though
+    func randomAsteroidPoint() -> CGPoint {
+        let screenWidth = UIScreen.main.bounds.width
+        let screenHeight = UIScreen.main.bounds.height
+        let centerX = screenWidth / 2
+        let centerY = screenHeight / 2
+        let exclusionRadius: CGFloat = 80
+
+        var x: CGFloat
+        var y: CGFloat
+
+        repeat {
+            x = CGFloat.random(in: 0..<screenWidth)
+            y = CGFloat.random(in: 100..<(screenHeight - 100))
+        } while (pow(x - centerX, 2) + pow(y - centerY, 2)) <= pow(exclusionRadius, 2)
+
+        return CGPoint(x: x, y: y)
     }
     
-    func randomShape() -> AsteroidShape {
+    /// Does what it says on the tin.
+    func randomAsteroidShape() -> AsteroidShape {
         let s = Int.random(in: 0..<4)
         if s == 0 { return .ShapeA}
         if s == 1 { return .ShapeB}
@@ -222,6 +246,7 @@ class GameManager: ObservableObject {
         return .ShapeD
     }
     
+    ///Called from the player hitting thrust
     func startMovingShip() {
         shipTrajectoryAngle = shipAngle
         isShipThrusting = true
@@ -237,7 +262,7 @@ class GameManager: ObservableObject {
         generator.impactOccurred()
         
     }
-    
+    /// We do this every frame
     func moveShip(){
         shipPos.x += shipVelocity.x * 0.6
         shipPos.y += shipVelocity.y * 0.6
@@ -259,6 +284,7 @@ class GameManager: ObservableObject {
         }
     }
     
+    /// Move the dead bits of the ship
     func explodeShip(){
         if shipExploding {
             let newPosA = moveAsset(from: shipExpA!.position, atAngle: shipExpA!.angle, withDistance: 1.0)
@@ -353,7 +379,7 @@ class GameManager: ObservableObject {
                 if asteroidArray.indices.contains(aIndex)  {
                     let astHit = asteroidArray[aIndex]
                     ///Update Score and add explosion shrapnel and remove the asteroid
-                    score += astHit.asteroidType.scores()
+                    addScore(newScore:astHit.asteroidType.scores())
                     heartBeat -= 0.01
                     explosionArray.append(Explosion(position: astHit.position, rotation: astHit.rotation))
                     asteroidArray.remove(at: aIndex)
@@ -362,13 +388,13 @@ class GameManager: ObservableObject {
                     generator.impactOccurred()
                     if astHit.asteroidType == .large {
                         soundFX.bigHitSound()
-                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAngle(), velocity: 1.2, type: .medium,shape: astHit.asteroidShape))
-                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAngle(), velocity: 1.2, type: .medium,shape: astHit.asteroidShape))
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAsteroidAngle(), velocity: 1.2, type: .medium,shape: astHit.asteroidShape))
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAsteroidAngle(), velocity: 1.2, type: .medium,shape: astHit.asteroidShape))
                         
                     } else if astHit.asteroidType == .medium {
                         soundFX.mediumHitSound()
-                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAngle(), velocity: 1.5, type: .small,shape: astHit.asteroidShape))
-                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAngle(), velocity: 1.5, type: .small,shape: astHit.asteroidShape))
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAsteroidAngle(), velocity: 1.5, type: .small,shape: astHit.asteroidShape))
+                        asteroidArray.append(Asteroid(position: astHit.position, angle: randomAsteroidAngle(), velocity: 1.5, type: .small,shape: astHit.asteroidShape))
                         
                     } else {
                         soundFX.smallHitSound()
@@ -420,5 +446,51 @@ class GameManager: ObservableObject {
         let newX = start.x + deltaX
         let newY = start.y + deltaY
         return CGPoint(x: newX, y: newY)
+    }
+    
+    ///Add to the score
+    func addScore(newScore:Int) {
+        score += newScore
+        ///Extra life every 10000 points
+        if score >= 10000 && score % 10000 == 0 {
+                lives += 1
+            }
+    }
+    
+    ///Hi Score handling from the ControlsView
+    func addLetter(){
+        letterArray[letterIndex] = hiScores.highScoreLetters[selectedLetter]
+    }
+    
+    func letterUp() {
+        selectedLetter += 1
+        if selectedLetter == 26 {
+            selectedLetter = 0
+        }
+        letterArray[letterIndex] = hiScores.highScoreLetters[selectedLetter]
+    }
+
+    func letterDown() {
+        selectedLetter -= 1
+        if selectedLetter == -1 {
+            selectedLetter = 25
+        }
+        letterArray[letterIndex] = hiScores.highScoreLetters[selectedLetter]
+    }
+    
+    func nextLetter() {
+        letterIndex += 1
+        selectedLetter = 0
+        /// Final letter and store it
+        if letterIndex == 3 {
+            hiScores.addScores(score: score, initials: String(letterArray))
+            hiScores.getScores()
+            gameState = .intro
+            lives = 3
+            ///Tidy up for next time
+            letterIndex = 0
+            selectedLetter = 0
+            letterArray = ["A","A","A"]
+        }
     }
 }

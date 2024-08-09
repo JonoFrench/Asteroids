@@ -16,7 +16,7 @@ struct ControlsView: View {
                 .fill(.red.gradient)
                 .stroke(.white, lineWidth: 2)
                 .frame(width: 100, height: 100)
-                .gesture(
+                .simultaneousGesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({_ in
                             if manager.gameState == .playing {
@@ -29,6 +29,15 @@ struct ControlsView: View {
                             }
                         })
                 )
+                .simultaneousGesture(
+                    TapGesture()
+                        .onEnded({
+                            if manager.gameState == .highscore {
+                                manager.letterUp()
+                            }
+                        })
+                )
+            
             Spacer()
             VStack {
                 Circle()
@@ -47,6 +56,8 @@ struct ControlsView: View {
                                     manager.fireBullet()
                                 } else if manager.gameState == .ended {
                                     manager.gameState = .intro
+                                } else if manager.gameState == .highscore {
+                                    manager.nextLetter()
                                 }
                             })
                     )
@@ -73,7 +84,7 @@ struct ControlsView: View {
                 .fill(.red.gradient)
                 .stroke(.white, lineWidth: 2)
                 .frame(width: 100, height: 100)
-                .gesture(
+                .simultaneousGesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({_ in
                             if manager.gameState == .playing {
@@ -83,6 +94,14 @@ struct ControlsView: View {
                         .onEnded({_ in
                             if manager.gameState == .playing {
                                 manager.shipRight = false
+                            }
+                        })
+                )
+                .simultaneousGesture(
+                    TapGesture()
+                        .onEnded({
+                            if manager.gameState == .highscore {
+                                manager.letterDown()
                             }
                         })
                 )
