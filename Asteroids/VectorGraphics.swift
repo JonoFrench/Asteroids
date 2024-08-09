@@ -125,19 +125,19 @@ func angleBetweenPoints(point1: CGPoint, point2: CGPoint) -> CGFloat {
     return angleInDegrees
 }
 
-// Function to modify the angle based on an accuracy percentage
+/// Function to modify the angle based on an accuracy percentage
 func modifiedAngleBetweenPoints(point1: CGPoint, point2: CGPoint, accuracy: CGFloat) -> CGFloat {
     let actualAngle = angleBetweenPoints(point1: point1, point2: point2)
     
-    // Calculate how much to modify the angle based on accuracy
-    // accuracy = 100 -> No modification (100% accurate)
-    // accuracy < 100 -> Modify the angle
+    /// Calculate how much to modify the angle based on accuracy
+    /// accuracy = 100 -> No modification (100% accurate)
+    /// accuracy < 100 -> Modify the angle
     let modificationRange: CGFloat = 50 // Define how much the angle can be modified (e.g., ±10 degrees)
     let accuracyFactor = (100 - accuracy) / 100 // Lower accuracy means higher modification
     let modification = modificationRange * accuracyFactor
     
-    // Apply modification to the actual angle
-    // This could be a random offset within the modification range or a systematic one
+    /// Apply modification to the actual angle
+    /// This could be a random offset within the modification range or a systematic one
     let modifiedAngle = actualAngle + (CGFloat.random(in: -modification...modification))
     
     return modifiedAngle

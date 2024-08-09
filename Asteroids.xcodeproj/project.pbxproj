@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		34858B6D2C662E1C000E95F5 /* NewHighScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34858B6C2C662E1C000E95F5 /* NewHighScoreView.swift */; };
+		34858B702C66A1F3000E95F5 /* ManagerScoreExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34858B6F2C66A1F3000E95F5 /* ManagerScoreExt.swift */; };
+		34858B722C66A24E000E95F5 /* ManagerSaucerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34858B712C66A24E000E95F5 /* ManagerSaucerExt.swift */; };
 		34A328082C61811C0092B175 /* thrust.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A327FE2C61811B0092B175 /* thrust.wav */; };
 		34A328092C61811C0092B175 /* saucerBig.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A327FF2C61811B0092B175 /* saucerBig.wav */; };
 		34A3280A2C61811C0092B175 /* bangMedium.wav in Resources */ = {isa = PBXBuildFile; fileRef = 34A328002C61811B0092B175 /* bangMedium.wav */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		34858B6C2C662E1C000E95F5 /* NewHighScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighScoreView.swift; sourceTree = "<group>"; };
+		34858B6F2C66A1F3000E95F5 /* ManagerScoreExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerScoreExt.swift; sourceTree = "<group>"; };
+		34858B712C66A24E000E95F5 /* ManagerSaucerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSaucerExt.swift; sourceTree = "<group>"; };
 		34A327FE2C61811B0092B175 /* thrust.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = thrust.wav; sourceTree = "<group>"; };
 		34A327FF2C61811B0092B175 /* saucerBig.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = saucerBig.wav; sourceTree = "<group>"; };
 		34A328002C61811B0092B175 /* bangMedium.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bangMedium.wav; sourceTree = "<group>"; };
@@ -107,6 +111,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34858B6E2C66A1B3000E95F5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				34B38C482C5FB9B200C2CAAD /* GameManager.swift */,
+				34858B6F2C66A1F3000E95F5 /* ManagerScoreExt.swift */,
+				34858B712C66A24E000E95F5 /* ManagerSaucerExt.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		34A327FD2C6180FB0092B175 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +204,7 @@
 		34B38C312C5F9F0500C2CAAD /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				34858B6E2C66A1B3000E95F5 /* Manager */,
 				34A328382C6621240092B175 /* HiScores */,
 				34A328312C6525570092B175 /* Views */,
 				34A3281A2C63A9E30092B175 /* font */,
@@ -198,7 +213,6 @@
 				34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */,
 				34B38C362C5F9F0700C2CAAD /* Assets.xcassets */,
 				34B38C382C5F9F0700C2CAAD /* Preview Content */,
-				34B38C482C5FB9B200C2CAAD /* GameManager.swift */,
 				34B38C532C60F96500C2CAAD /* VectorGraphics.swift */,
 			);
 			path = Asteroids;
@@ -294,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34858B702C66A1F3000E95F5 /* ManagerScoreExt.swift in Sources */,
 				34B38C472C5FA6EE00C2CAAD /* ShipView.swift in Sources */,
 				34A3283F2C66215F0092B175 /* CoreDataStack.swift in Sources */,
 				34B38C522C602AD800C2CAAD /* SaucerView.swift in Sources */,
@@ -302,6 +317,7 @@
 				34B38C542C60F96500C2CAAD /* VectorGraphics.swift in Sources */,
 				34A328182C623A2F0092B175 /* ExplosionView.swift in Sources */,
 				34B38C492C5FB9B200C2CAAD /* GameManager.swift in Sources */,
+				34858B722C66A24E000E95F5 /* ManagerSaucerExt.swift in Sources */,
 				34A3282E2C64D4840092B175 /* ShipLifeView.swift in Sources */,
 				34B38C432C5F9F4800C2CAAD /* GameView.swift in Sources */,
 				34A328412C66215F0092B175 /* HighScores+CoreDataClass.swift in Sources */,
