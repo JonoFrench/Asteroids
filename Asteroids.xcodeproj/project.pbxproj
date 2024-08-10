@@ -559,7 +559,7 @@
 			);
 			currentVersion = 34A3283C2C66215E0092B175 /* HighScores.xcdatamodel */;
 			name = HighScores.xcdatamodeld;
-			path = /Users/jonathanfrench/Projects/Asteroids/Asteroids/HiScores/HighScores.xcdatamodeld;
+			path = HighScores.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

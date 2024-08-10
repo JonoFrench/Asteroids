@@ -23,7 +23,6 @@ class GameManager: ObservableObject {
     var gameState:GameState = .intro
     @Published
     var shipAngle = 0.0
-    @Published
     var shipTrajectoryAngle = 0.0
     var shipVelocity = CGPoint(x: 0.0, y: 0.0)
     var shipAcceleration = CGPoint(x: 0.0, y: 0.0)
@@ -31,16 +30,11 @@ class GameManager: ObservableObject {
     var explosionTimer = 0
     var shipLeft = false
     var shipRight = false
-    @Published
     var shipExploding = false
-    @Published
     var shipExpA:ShipExplodingStruc?
-    @Published
     var shipExpB:ShipExplodingStruc?
-    @Published
     var shipExpC:ShipExplodingStruc?
     var shortPause = false
-    @Published
     var isShipThrusting = false
     @Published
     var shipPos = CGPoint(x: 100.0, y: 100.0)
@@ -56,7 +50,7 @@ class GameManager: ObservableObject {
     var saucer:UFO?
     var hasSaucer = false
     var hasSaucerBullet = false
-    @Published
+//    @Published
     var score = 0
     var nextLifeScore = 10000
     var level = 1
@@ -96,7 +90,7 @@ class GameManager: ObservableObject {
             moveAsteroids()
             ///Explosions
             animateExplosions()
-            ///UFO
+            ///Saucer
             if !hasSaucer {
                 addSaucer()
             } else {
@@ -126,14 +120,13 @@ class GameManager: ObservableObject {
         score = 0 /// Set to 9500 odd to test extra lives....
         lives = 3
         level = 1
-        letterIndex = 0
-        selectedLetter = 0
-        letterArray = ["A","A","A"]
         hasSaucer = false
         startGame()
     }
     
     func startGame() {
+        shipLeft = false
+        shipRight = false
         gameState = .getready
         heartBeat = 0.8
         shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
@@ -202,9 +195,11 @@ class GameManager: ObservableObject {
                 }
             } else {
                 ///Game over sunshine!
-                ///
+                ///If it's a new hi score then make sure everything is set up.
                 if hiScores.isNewHiScore(score: score) {
-                    print("New High Score")
+                    letterIndex = 0
+                    selectedLetter = 0
+                    letterArray = ["A","A","A"]
                     gameState = .highscore
                 } else {
                     lives = 3
@@ -223,6 +218,7 @@ class GameManager: ObservableObject {
                 deadShip()
             }
         }
+        /// Or even a saucer....
         if hasSaucer {
             if let saucerUW = saucer {
                 let aSize = saucerUW.type.hitSize()
@@ -235,7 +231,7 @@ class GameManager: ObservableObject {
                 }
             }
         }
-        
+        /// or been shot by a saucer
         if hasSaucerBullet {
             if isPointWithinCircle(center: shipPos, diameter: 10.0, point: saucerBullet!.position) {
                 deadShip()
@@ -265,10 +261,10 @@ class GameManager: ObservableObject {
     
     /// Does what it says on the tin.
     func randomAsteroidAngle() -> Double {
-        return Double(Int.random(in: 0..<360))
+        return Double.random(in: 0..<360)
     }
     
-    /// Make sure our point isn't on the ship though
+    /// Make sure the asteroid position isn't on the ship though
     func randomAsteroidPoint() -> CGPoint {
         let screenWidth = UIScreen.main.bounds.width
         let screenHeight = UIScreen.main.bounds.height
@@ -289,11 +285,8 @@ class GameManager: ObservableObject {
     
     /// Does what it says on the tin.
     func randomAsteroidShape() -> AsteroidShape {
-        let s = Int.random(in: 0..<4)
-        if s == 0 { return .ShapeA}
-        if s == 1 { return .ShapeB}
-        if s == 2 { return .ShapeC}
-        return .ShapeD
+        let shapes: [AsteroidShape] = [.ShapeA, .ShapeB, .ShapeC, .ShapeD]
+        return shapes.randomElement()!
     }
     
     ///Called from the player hitting thrust
