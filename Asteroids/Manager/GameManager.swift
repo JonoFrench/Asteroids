@@ -17,16 +17,24 @@ enum GameState {
 class GameManager: ObservableObject {
     let hiScores:AsteroidHighScores = AsteroidHighScores()
     let soundFX:SoundFX = SoundFX()
+    var gameSize = CGSize()
+/// gameSize +- for checking ship off screen and appearing on the other side.
+    let widthPlus = 20.0
+    let heightPlus = 30.0
+    let widthAsteroidPlus = 40.0
+    let heightAsteroidPlus = 50.0
+
     @Published
     var lives = 3
     @Published
     var gameState:GameState = .intro
     @Published
-    var shipAngle = 0.0
+    var shipAngle = 270.0
     var shipTrajectoryAngle = 0.0
-    var shipVelocity = CGPoint(x: 0.0, y: 0.0)
-    var shipAcceleration = CGPoint(x: 0.0, y: 0.0)
+    var shipVelocity = CGPoint()
+    var shipAcceleration = CGPoint()
     var shipThrust = 1.0
+    var shipStartPos = CGPoint()
     var explosionTimer = 0
     var shipLeft = false
     var shipRight = false
@@ -37,7 +45,7 @@ class GameManager: ObservableObject {
     var shortPause = false
     var isShipThrusting = false
     @Published
-    var shipPos = CGPoint(x: 100.0, y: 100.0)
+    var shipPos = CGPoint()
     @Published
     var bulletArray:[Bullet] = []
     @Published
@@ -50,7 +58,6 @@ class GameManager: ObservableObject {
     var saucer:UFO?
     var hasSaucer = false
     var hasSaucerBullet = false
-//    @Published
     var score = 0
     var nextLifeScore = 10000
     var level = 1
@@ -120,6 +127,7 @@ class GameManager: ObservableObject {
         score = 0 /// Set to 9500 odd to test extra lives....
         lives = 3
         level = 1
+        shipAngle = 270.0
         hasSaucer = false
         startGame()
     }
@@ -129,12 +137,13 @@ class GameManager: ObservableObject {
         shipRight = false
         gameState = .getready
         heartBeat = 0.8
-        shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
+        /// Get shipPos from a geometry reader in the GameView. This is then set in the .onAppear
+        shipPos = shipStartPos
         asteroidArray.removeAll()
         addAsteroids()
         shipTrajectoryAngle = 0.0
-        shipVelocity = CGPoint(x: 0.0, y: 0.0)
-        shipAcceleration = CGPoint(x: 0.0, y: 0.0)
+        shipVelocity = CGPoint()
+        shipAcceleration = CGPoint()
         shipThrust = 1.0
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
@@ -183,10 +192,10 @@ class GameManager: ObservableObject {
             
             if lives > 0 {
                 gameState = .getready
-                shipPos = CGPoint(x: UIScreen.main.bounds.width / 2, y: (UIScreen.main.bounds.height / 2) - 150)
+                shipPos = shipStartPos
                 shipTrajectoryAngle = 0.0
-                shipVelocity = CGPoint(x: 0.0, y: 0.0)
-                shipAcceleration = CGPoint(x: 0.0, y: 0.0)
+                shipVelocity = CGPoint()
+                shipAcceleration = CGPoint()
                 shipThrust = 1.0
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [self] in
@@ -265,12 +274,14 @@ class GameManager: ObservableObject {
     }
     
     /// Make sure the asteroid position isn't on the ship though
+    /// So we have an exclusion zone in the center.
     func randomAsteroidPoint() -> CGPoint {
-        let screenWidth = UIScreen.main.bounds.width
-        let screenHeight = UIScreen.main.bounds.height
+        let screenWidth = gameSize.width
+        let screenHeight = gameSize.height
         let centerX = screenWidth / 2
         let centerY = screenHeight / 2
-        let exclusionRadius: CGFloat = 80
+
+        let exclusionRadius: CGFloat = 100
         
         var x: CGFloat
         var y: CGFloat
@@ -312,18 +323,17 @@ class GameManager: ObservableObject {
         shipVelocity.x += shipAcceleration.x * 0.6
         shipVelocity.y += shipAcceleration.y * 0.6
         shipAcceleration = CGPoint()
-        
-        if shipPos.x < -20 {
-            shipPos.x = UIScreen.main.bounds.width + 20
+        if shipPos.x < -widthPlus {
+            shipPos.x = gameSize.width + widthPlus
         }
-        else if shipPos.x > UIScreen.main.bounds.width + 20 {
-            shipPos.x = -20
+        else if shipPos.x > gameSize.width + widthPlus {
+            shipPos.x = -widthPlus
         }
-        else if shipPos.y < -20 {
-            shipPos.y = UIScreen.main.bounds.height - 300
+        else if shipPos.y < -heightPlus {
+            shipPos.y = gameSize.height + heightPlus
         }
-        else if shipPos.y > UIScreen.main.bounds.height - 300 {
-            shipPos.y = -20
+        else if shipPos.y > gameSize.height + heightPlus {
+            shipPos.y = -heightPlus
         }
     }
     
@@ -390,7 +400,7 @@ class GameManager: ObservableObject {
             ///Remove any bullets that have gone out the screen
             var baIndexSet:IndexSet = []
             for (index,_) in bulletArray.enumerated(){
-                if bulletArray[index].position.x < 0 || bulletArray[index].position.x > UIScreen.main.bounds.width || bulletArray[index].position.y < 0 || bulletArray[index].position.y > UIScreen.main.bounds.height {
+                if bulletArray[index].position.x < 0 || bulletArray[index].position.x > gameSize.width || bulletArray[index].position.y < 0 || bulletArray[index].position.y > gameSize.height {
                     baIndexSet.insert(index)
                 }
             }
@@ -407,7 +417,7 @@ class GameManager: ObservableObject {
         if let saucerBulletUR = saucerBullet {
             saucerBullet?.position = moveAsset(from: saucerBulletUR.position, atAngle: saucerBulletUR.angle, withDistance: saucerBulletUR.velocity)
             ///Saucer bullet off screen.
-            if saucerBulletUR.position.x < 0 || saucerBulletUR.position.x > UIScreen.main.bounds.width || saucerBulletUR.position.y < 0 || saucerBulletUR.position.y > UIScreen.main.bounds.height {
+            if saucerBulletUR.position.x < 0 || saucerBulletUR.position.x > gameSize.width || saucerBulletUR.position.y < 0 || saucerBulletUR.position.y > gameSize.height {
                 saucerBullet = nil
                 hasSaucerBullet = false
             }
@@ -488,19 +498,19 @@ class GameManager: ObservableObject {
                     }
                 }
             }
-            
+
             for (index,_) in asteroidArray.enumerated(){
-                if asteroidArray[index].position.x < -20 {
-                    asteroidArray[index].position.x = UIScreen.main.bounds.width + 20
+                if asteroidArray[index].position.x < -widthAsteroidPlus {
+                    asteroidArray[index].position.x = gameSize.width + widthAsteroidPlus
                 }
-                if asteroidArray[index].position.x > UIScreen.main.bounds.width + 20 {
-                    asteroidArray[index].position.x = -20
+                if asteroidArray[index].position.x > gameSize.width + widthAsteroidPlus {
+                    asteroidArray[index].position.x = -widthAsteroidPlus
                 }
-                if asteroidArray[index].position.y < -20 {
-                    asteroidArray[index].position.y = UIScreen.main.bounds.height - 300
+                if asteroidArray[index].position.y < -heightAsteroidPlus {
+                    asteroidArray[index].position.y = gameSize.height + heightAsteroidPlus
                 }
-                if asteroidArray[index].position.y > UIScreen.main.bounds.height - 300 {
-                    asteroidArray[index].position.y = -20
+                if asteroidArray[index].position.y > gameSize.height + heightAsteroidPlus {
+                    asteroidArray[index].position.y = -heightAsteroidPlus
                 }
             }
         }
