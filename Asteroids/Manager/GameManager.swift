@@ -390,9 +390,9 @@ class GameManager: ObservableObject {
         explosionTimer += 1
     }
     
-    ///Todo implement hyperspace handling
+    ///Hyperspace handling. If yer gonna die, this may work....
     func hyperSpace() {
-        print("hyperSpace")
+        shipPos = CGPoint(x: Double.random(in: widthPlus...gameSize.width - widthPlus), y: Double.random(in: heightPlus...gameSize.height - heightPlus))
     }
     
     func moveBullet(){
