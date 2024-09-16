@@ -73,6 +73,22 @@ class GameManager: ObservableObject {
     var selectedLetter = 0
     
     init() {
+#if os(tvOS)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(controllerDidConnect),
+            name: .GCControllerDidConnect,
+            object: nil
+        )
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(controllerDidDisconnect),
+            name: .GCControllerDidDisconnect,
+            object: nil
+        )
+#endif
         ///Here we go, lets have a nice DisplayLink to update our model with the screen refresh.
         let displayLink:CADisplayLink = CADisplayLink(target: self, selector: #selector(refreshModel))
         displayLink.add(to: .main, forMode:.common)
@@ -312,9 +328,10 @@ class GameManager: ObservableObject {
             isShipThrusting = false
         }
         /// Bit of haptic feedback helps
+        #if os(iOS)
         let generator = UIImpactFeedbackGenerator(style: .soft)
         generator.impactOccurred()
-        
+        #endif
     }
     /// We do this every frame
     func moveShip(){
@@ -371,8 +388,10 @@ class GameManager: ObservableObject {
         bulletArray.append(Bullet(position: shipPos, angle: shipAngle, velocity: 6.0))
         soundFX.fireSound()
         /// Bit of haptic feedback helps
+#if os(iOS)
         let generator = UIImpactFeedbackGenerator(style: .rigid)
         generator.impactOccurred()
+        #endif
     }
     
     func animateExplosions() {
@@ -444,8 +463,10 @@ class GameManager: ObservableObject {
                         explosionArray.append(Explosion(position: saucer!.position, rotation: 180.0))
                         saucer = nil
                         hasSaucer = false
+#if os(iOS)
                         let generator = UIImpactFeedbackGenerator(style: .heavy)
                         generator.impactOccurred()
+                        #endif
                         soundFX.bigHitSound()
                     }
                 }
@@ -461,8 +482,10 @@ class GameManager: ObservableObject {
                     explosionArray.append(Explosion(position: astHit.position, rotation: astHit.rotation))
                     asteroidArray.remove(at: aIndex)
                     /// Bit of haptic feedback helps
+#if os(iOS)
                     let generator = UIImpactFeedbackGenerator(style: .heavy)
                     generator.impactOccurred()
+                    #endif
                     if astHit.asteroidType == .large {
                         soundFX.bigHitSound()
                         asteroidArray.append(Asteroid(position: astHit.position, angle: randomAsteroidAngle(), velocity: 1.2, type: .medium,shape: astHit.asteroidShape))

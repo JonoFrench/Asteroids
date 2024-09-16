@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "stars.jpg",
-      "idiom" : "iphone"
+      "filename" : "gameBackground.png",
+      "idiom" : "tv"
     }
   ],
   "info" : {

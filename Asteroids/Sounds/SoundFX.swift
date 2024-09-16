@@ -10,27 +10,27 @@ import AVFoundation
 
 final class SoundFX {
     
-    var bigHitAudioPlayer: AVAudioPlayer?
-    var mediumHitAudioPlayer: AVAudioPlayer?
-    var smallHitAudioPlayer: AVAudioPlayer?
-    var shootAudioPlayer: AVAudioPlayer?
-    var saucerBigAudioPlayer: AVAudioPlayer?
-    var saucerSmallAudioPlayer: AVAudioPlayer?
-    var extraShipAudioPlayer: AVAudioPlayer?
-    var thrustAudioPlayer: AVAudioPlayer?
-    var beat1AudioPlayer: AVAudioPlayer?
-    var beat2AudioPlayer: AVAudioPlayer?
+    private var bigHitAudioPlayer: AVAudioPlayer?
+    private var mediumHitAudioPlayer: AVAudioPlayer?
+    private var smallHitAudioPlayer: AVAudioPlayer?
+    private var shootAudioPlayer: AVAudioPlayer?
+    private var saucerBigAudioPlayer: AVAudioPlayer?
+    private var saucerSmallAudioPlayer: AVAudioPlayer?
+    private var extraShipAudioPlayer: AVAudioPlayer?
+    private var thrustAudioPlayer: AVAudioPlayer?
+    private var beat1AudioPlayer: AVAudioPlayer?
+    private var beat2AudioPlayer: AVAudioPlayer?
 
-    lazy var fireurl = Bundle.main.url(forResource: "fire", withExtension: "wav")
-    lazy var bigKillurl = Bundle.main.url(forResource: "bangLarge", withExtension: "wav")
-    lazy var mediumKillurl = Bundle.main.url(forResource: "bangMedium", withExtension: "wav")
-    lazy var smallKillurl = Bundle.main.url(forResource: "bangSmall", withExtension: "wav")
-    lazy var extraShipurl = Bundle.main.url(forResource: "extraShip", withExtension: "wav")
-    lazy var smallUFOurl = Bundle.main.url(forResource: "saucerSmall", withExtension: "wav")
-    lazy var bigUFOurl = Bundle.main.url(forResource: "saucerBig", withExtension: "wav")
-    lazy var thrusturl = Bundle.main.url(forResource: "thrust", withExtension: "wav")
-    lazy var beat1url = Bundle.main.url(forResource: "beat1", withExtension: "wav")
-    lazy var beat2url = Bundle.main.url(forResource: "beat2", withExtension: "wav")
+    private lazy var fireurl = Bundle.main.url(forResource: "fire", withExtension: "wav")
+    private lazy var bigKillurl = Bundle.main.url(forResource: "bangLarge", withExtension: "wav")
+    private lazy var mediumKillurl = Bundle.main.url(forResource: "bangMedium", withExtension: "wav")
+    private lazy var smallKillurl = Bundle.main.url(forResource: "bangSmall", withExtension: "wav")
+    private lazy var extraShipurl = Bundle.main.url(forResource: "extraShip", withExtension: "wav")
+    private lazy var smallUFOurl = Bundle.main.url(forResource: "saucerSmall", withExtension: "wav")
+    private lazy var bigUFOurl = Bundle.main.url(forResource: "saucerBig", withExtension: "wav")
+    private lazy var thrusturl = Bundle.main.url(forResource: "thrust", withExtension: "wav")
+    private lazy var beat1url = Bundle.main.url(forResource: "beat1", withExtension: "wav")
+    private lazy var beat2url = Bundle.main.url(forResource: "beat2", withExtension: "wav")
 
     init() {
         do {

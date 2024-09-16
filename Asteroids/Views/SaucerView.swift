@@ -45,6 +45,10 @@ struct UFO:Identifiable {
         self.velocity = velocity
         self.type = type
         self.points = type.shape(points: shape)
+#if os(tvOS)
+self.velocity = self.velocity * 2
+#endif
+
     }
 }
 

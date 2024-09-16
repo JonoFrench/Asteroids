@@ -38,21 +38,30 @@
 		34A328412C66215F0092B175 /* HighScores+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A3283D2C66215F0092B175 /* HighScores+CoreDataClass.swift */; };
 		34A328432C6622990092B175 /* AsteroidHighScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A328422C6622990092B175 /* AsteroidHighScores.swift */; };
 		34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C322C5F9F0500C2CAAD /* AsteroidsApp.swift */; };
-		34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C342C5F9F0500C2CAAD /* ContentView.swift */; };
+		34B38C352C5F9F0500C2CAAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C342C5F9F0500C2CAAD /* ContentView.swift */; platformFilter = ios; };
 		34B38C372C5F9F0700C2CAAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B38C362C5F9F0700C2CAAD /* Assets.xcassets */; };
 		34B38C3A2C5F9F0700C2CAAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34B38C392C5F9F0700C2CAAD /* Preview Assets.xcassets */; };
 		34B38C412C5F9F3600C2CAAD /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C402C5F9F3600C2CAAD /* TopView.swift */; };
 		34B38C432C5F9F4800C2CAAD /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C422C5F9F4800C2CAAD /* GameView.swift */; };
-		34B38C452C5F9F5B00C2CAAD /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C442C5F9F5B00C2CAAD /* ControlsView.swift */; };
+		34B38C452C5F9F5B00C2CAAD /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C442C5F9F5B00C2CAAD /* ControlsView.swift */; platformFilter = ios; };
 		34B38C472C5FA6EE00C2CAAD /* ShipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C462C5FA6EE00C2CAAD /* ShipView.swift */; };
 		34B38C492C5FB9B200C2CAAD /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C482C5FB9B200C2CAAD /* GameManager.swift */; };
 		34B38C4E2C5FDB6800C2CAAD /* BulletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C4D2C5FDB6800C2CAAD /* BulletView.swift */; };
 		34B38C502C6027C200C2CAAD /* AsteroidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C4F2C6027C200C2CAAD /* AsteroidView.swift */; };
 		34B38C522C602AD800C2CAAD /* SaucerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C512C602AD800C2CAAD /* SaucerView.swift */; };
 		34B38C542C60F96500C2CAAD /* VectorGraphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B38C532C60F96500C2CAAD /* VectorGraphics.swift */; };
+		34DF5E882C9831D400BB79D6 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34DF5E862C98316A00BB79D6 /* GameController.framework */; platformFilters = (tvos, ); };
+		34DF5E8A2C98322F00BB79D6 /* ContentViewTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF5E892C98322F00BB79D6 /* ContentViewTV.swift */; };
+		34DF5E8C2C98526C00BB79D6 /* GameManager+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF5E8B2C98526C00BB79D6 /* GameManager+TV.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		340999D22C987E6200F4FE3A /* AsteroidsHighScores.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AsteroidsHighScores.PNG; sourceTree = "<group>"; };
+		340999D32C987E6200F4FE3A /* AsteroidsStart.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AsteroidsStart.PNG; sourceTree = "<group>"; };
+		340999D42C987E6200F4FE3A /* AsteroidsGamePlay.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AsteroidsGamePlay.PNG; sourceTree = "<group>"; };
+		340999D52C987E6200F4FE3A /* AsteroidsGamePlay2.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AsteroidsGamePlay2.PNG; sourceTree = "<group>"; };
+		340999D62C987E6300F4FE3A /* AsteroidsGetReady.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AsteroidsGetReady.PNG; sourceTree = "<group>"; };
+		340999D72C987E6300F4FE3A /* AsteroidsScoring.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AsteroidsScoring.PNG; sourceTree = "<group>"; };
 		34858B6C2C662E1C000E95F5 /* NewHighScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHighScoreView.swift; sourceTree = "<group>"; };
 		34858B6F2C66A1F3000E95F5 /* ManagerScoreExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerScoreExt.swift; sourceTree = "<group>"; };
 		34858B712C66A24E000E95F5 /* ManagerSaucerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSaucerExt.swift; sourceTree = "<group>"; };
@@ -98,6 +107,9 @@
 		34B38C4F2C6027C200C2CAAD /* AsteroidView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsteroidView.swift; sourceTree = "<group>"; };
 		34B38C512C602AD800C2CAAD /* SaucerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaucerView.swift; sourceTree = "<group>"; };
 		34B38C532C60F96500C2CAAD /* VectorGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorGraphics.swift; sourceTree = "<group>"; };
+		34DF5E862C98316A00BB79D6 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS17.5.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		34DF5E892C98322F00BB79D6 /* ContentViewTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTV.swift; sourceTree = "<group>"; };
+		34DF5E8B2C98526C00BB79D6 /* GameManager+TV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameManager+TV.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,18 +117,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34DF5E882C9831D400BB79D6 /* GameController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		340999C82C987AC500F4FE3A /* ScreenShots */ = {
+			isa = PBXGroup;
+			children = (
+				340999D42C987E6200F4FE3A /* AsteroidsGamePlay.PNG */,
+				340999D52C987E6200F4FE3A /* AsteroidsGamePlay2.PNG */,
+				340999D62C987E6300F4FE3A /* AsteroidsGetReady.PNG */,
+				340999D22C987E6200F4FE3A /* AsteroidsHighScores.PNG */,
+				340999D72C987E6300F4FE3A /* AsteroidsScoring.PNG */,
+				340999D32C987E6200F4FE3A /* AsteroidsStart.PNG */,
+			);
+			path = ScreenShots;
+			sourceTree = "<group>";
+		};
 		34858B6E2C66A1B3000E95F5 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				34B38C482C5FB9B200C2CAAD /* GameManager.swift */,
 				34858B6F2C66A1F3000E95F5 /* ManagerScoreExt.swift */,
 				34858B712C66A24E000E95F5 /* ManagerSaucerExt.swift */,
+				34DF5E8B2C98526C00BB79D6 /* GameManager+TV.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -169,6 +196,7 @@
 				34A328342C660EC00092B175 /* HiScoreView.swift */,
 				34A328362C660EDC0092B175 /* InfoView.swift */,
 				34858B6C2C662E1C000E95F5 /* NewHighScoreView.swift */,
+				34DF5E892C98322F00BB79D6 /* ContentViewTV.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +218,7 @@
 			children = (
 				34B38C312C5F9F0500C2CAAD /* Asteroids */,
 				34B38C302C5F9F0500C2CAAD /* Products */,
+				34DF5E852C98316A00BB79D6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -204,6 +233,7 @@
 		34B38C312C5F9F0500C2CAAD /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				340999C82C987AC500F4FE3A /* ScreenShots */,
 				34858B6E2C66A1B3000E95F5 /* Manager */,
 				34A328382C6621240092B175 /* HiScores */,
 				34A328312C6525570092B175 /* Views */,
@@ -224,6 +254,14 @@
 				34B38C392C5F9F0700C2CAAD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		34DF5E852C98316A00BB79D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				34DF5E862C98316A00BB79D6 /* GameController.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +360,7 @@
 				34B38C432C5F9F4800C2CAAD /* GameView.swift in Sources */,
 				34A328412C66215F0092B175 /* HighScores+CoreDataClass.swift in Sources */,
 				34A328162C6184D90092B175 /* SoundFX.swift in Sources */,
+				34DF5E8C2C98526C00BB79D6 /* GameManager+TV.swift in Sources */,
 				34A3283E2C66215F0092B175 /* HighScores+CoreDataProperties.swift in Sources */,
 				34B38C452C5F9F5B00C2CAAD /* ControlsView.swift in Sources */,
 				34A328222C6402FE0092B175 /* GameOverView.swift in Sources */,
@@ -330,6 +369,7 @@
 				34A328372C660EDC0092B175 /* InfoView.swift in Sources */,
 				34B38C4E2C5FDB6800C2CAAD /* BulletView.swift in Sources */,
 				34858B6D2C662E1C000E95F5 /* NewHighScoreView.swift in Sources */,
+				34DF5E8A2C98322F00BB79D6 /* ContentViewTV.swift in Sources */,
 				34A328332C660EA90092B175 /* IntroView.swift in Sources */,
 				34B38C332C5F9F0500C2CAAD /* AsteroidsApp.swift in Sources */,
 				34A3282C2C64C3CD0092B175 /* LevelView.swift in Sources */,
@@ -467,6 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Asteroids/Preview Content\"";
@@ -489,9 +530,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaypeeff.Asteroids;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Debug;
 		};
@@ -500,6 +543,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Asteroids/Preview Content\"";
@@ -522,9 +566,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaypeeff.Asteroids;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 			};
 			name = Release;
 		};
@@ -558,7 +604,6 @@
 				34A3283C2C66215E0092B175 /* HighScores.xcdatamodel */,
 			);
 			currentVersion = 34A3283C2C66215E0092B175 /* HighScores.xcdatamodel */;
-			name = HighScores.xcdatamodeld;
 			path = HighScores.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

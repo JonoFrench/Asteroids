@@ -29,6 +29,7 @@ struct GameView: View {
             ForEach(manager.asteroidArray, id: \.id) { asteroid in
                 AsteroidView(asteroid: asteroid)
                     .position(asteroid.position)
+                    .zIndex(0.5)
             }
             ForEach(manager.explosionArray, id: \.id) { explosion in
                 ExplosionView(explosion: explosion)

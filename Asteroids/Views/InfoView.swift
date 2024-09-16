@@ -16,11 +16,20 @@
 import SwiftUI
 
 struct InfoView: View {
+#if os(iOS)
+    static var starttextSize:CGFloat = 30
+    static var headingTextSize:CGFloat = 30
+    static var copyTextSize:CGFloat = 16
+#elseif os(tvOS)
+    static var starttextSize:CGFloat = 48
+    static var headingTextSize:CGFloat = 60
+    static var copyTextSize:CGFloat = 32
+#endif
     var body: some View {
         VStack {
             Text("Scoring")
                 .foregroundStyle(.white)
-                .font(.custom("Hyperspace-Bold", size: 30))
+                .font(.custom("Hyperspace-Bold", size: InfoView.headingTextSize))
             Spacer()
 
             HStack {
@@ -32,7 +41,7 @@ struct InfoView: View {
                 Spacer()
                 Text("Large Asteroid 20 Pts")
                     .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 16))
+                    .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
                     .padding([.trailing])
                 Spacer()
             }
@@ -47,7 +56,7 @@ struct InfoView: View {
                 Spacer()
                 Text("Medium Asteroid 50 Pts")
                     .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 16))
+                    .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
                     .padding([.trailing])
                 Spacer()
             }
@@ -62,7 +71,7 @@ struct InfoView: View {
                 Spacer()
                 Text("Small Asteroid 100 Pts")
                     .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 16))
+                    .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
                     .padding([.trailing])
                 Spacer()
             }
@@ -77,7 +86,7 @@ struct InfoView: View {
                 Spacer()
                 Text("Large Saucer 200 Pts")
                     .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 16))
+                    .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
                     .padding([.trailing])
                 Spacer()
             }
@@ -92,19 +101,19 @@ struct InfoView: View {
                 Spacer()
                 Text("Small Saucer 990 Pts")
                     .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 16))
+                    .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
                     .padding([.trailing])
                 Spacer()
             }
             Spacer()
             Text("Extra life every 10000 pts")
                 .foregroundStyle(.white)
-                .font(.custom("Hyperspace-Bold", size: 16))
+                .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
 
             Spacer()
             Text("Press Fire to Start")
                 .foregroundStyle(.red)
-                .font(.custom("Hyperspace-Bold", size: 30))
+                .font(.custom("Hyperspace-Bold", size: InfoView.starttextSize))
         }.background(.clear)
     }
 }

@@ -46,6 +46,17 @@ struct VectorShape: Shape {
     var points: [CGPoint]
     func path(in rect: CGRect) -> Path {
         var path = Path()
+        #if os(tvOS)
+        let newPoints = points.map { point in
+            CGPoint(x: point.x * 2.0, y: point.y * 2.0)}
+        if let firstPoint = newPoints.first {
+            path.move(to: firstPoint)
+            for point in newPoints.dropFirst() {
+                path.addLine(to: point)
+            }
+            path.closeSubpath()
+        }
+        #else
         if let firstPoint = points.first {
             path.move(to: firstPoint)
             for point in points.dropFirst() {
@@ -53,6 +64,7 @@ struct VectorShape: Shape {
             }
             path.closeSubpath()
         }
+        #endif
         return path
     }
 }
@@ -62,12 +74,23 @@ struct VectorLine: Shape {
     var points: [CGPoint]
     func path(in rect: CGRect) -> Path {
         var path = Path()
+#if os(tvOS)
+        let newPoints = points.map { point in
+            CGPoint(x: point.x * 2.0, y: point.y * 2.0)}
+        if let firstPoint = newPoints.first {
+            path.move(to: firstPoint)
+            for point in newPoints.dropFirst() {
+                path.addLine(to: point)
+            }
+        }
+#else
         if let firstPoint = points.first {
             path.move(to: firstPoint)
             for point in points.dropFirst() {
                 path.addLine(to: point)
             }
         }
+#endif
         return path
     }
 }
@@ -85,7 +108,12 @@ func rotatePoints(_ points: [CGPoint], byDegrees angle: CGFloat) -> [CGPoint] {
 }
 
 func isPointWithinCircle(center: CGPoint, diameter: CGFloat, point: CGPoint) -> Bool {
-     let radius = diameter / 2
+    #if os(tvOS)
+    let diameter2 = diameter * 2
+    #else
+    let diameter2 = diameter
+    #endif
+     let radius = diameter2 / 2
      let distanceX = point.x - center.x
      let distanceY = point.y - center.y
      let distanceSquared = distanceX * distanceX + distanceY * distanceY
@@ -94,8 +122,13 @@ func isPointWithinCircle(center: CGPoint, diameter: CGFloat, point: CGPoint) -> 
  }
 
 func circlesIntersect(center1: CGPoint, diameter1: CGFloat, center2: CGPoint, diameter2: CGFloat) -> Bool {
+#if os(tvOS)
+    let radius1 = diameter1
+    let radius2 = diameter2
+#else
     let radius1 = diameter1 / 2
     let radius2 = diameter2 / 2
+#endif
 
     let distanceX = center2.x - center1.x
     let distanceY = center2.y - center1.y

@@ -9,6 +9,11 @@ import SwiftUI
 
 struct TopView: View {
     @EnvironmentObject var manager: GameManager
+#if os(iOS)
+    static var scoreTextSize:CGFloat = 24
+#elseif os(tvOS)
+    static var scoreTextSize:CGFloat = 48
+#endif
     var body: some View {
         VStack {
             HStack {
@@ -21,7 +26,7 @@ struct TopView: View {
                 Spacer()
                 Text("Score:\(String(format: "%06d", manager.score))")
                     .foregroundStyle(.white)
-                    .font(.custom("Hyperspace-Bold", size: 24))
+                    .font(.custom("Hyperspace-Bold", size: TopView.scoreTextSize))
                     .padding([.trailing])
             }
         }

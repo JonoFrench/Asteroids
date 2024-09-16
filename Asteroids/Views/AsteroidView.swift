@@ -60,6 +60,10 @@ struct Asteroid:Identifiable {
         self.asteroidType = type
         self.asteroidShape = shape
         self.points = asteroidType.shape(points:asteroidShape.points())
+        #if os(tvOS)
+        self.velocity = self.velocity * 2
+        #endif
+        
     }
     
     func checkHit(bulletPos:CGPoint) -> Bool {

@@ -10,6 +10,7 @@ import SwiftUI
 struct ControlsView: View {
     @EnvironmentObject var manager: GameManager
     var body: some View {
+#if os(iOS)
         HStack {
             Spacer()
             Circle()
@@ -126,6 +127,7 @@ struct ControlsView: View {
                 )
             Spacer()
         }
+        #endif
     }
 }
 
