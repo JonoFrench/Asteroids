@@ -23,9 +23,9 @@ Welcome to **Asteroids**, a SwiftUI-based remake of the classic arcade game. Thi
 
 <img src="/Asteroids/ScreenShots/AsteroidsStart.PNG" alt="Start" width="300"/>
 <img src="/Asteroids/ScreenShots/AsteroidsScoring.PNG" alt="Scoring" width="300"/>
+<img src="/Asteroids/ScreenShots/AsteroidsGetReady.PNG" alt="Get Ready" width="300"/>
 <img src="/Asteroids/ScreenShots/AsteroidsGamePlay1.PNG" alt="Gameplay 1" width="300"/>
 <img src="/Asteroids/ScreenShots/AsteroidsGamePlay2.PNG" alt="Gameplay 2" width="300"/>
-<img src="/Asteroids/ScreenShots/AsteroidsGetReady.PNG" alt="Get Ready" width="300"/>
 <img src="/Asteroids/ScreenShots/AsteroidsHighScores.PNG" alt="High Scores" width="300"/>
 
 ## Controls
