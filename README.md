@@ -20,8 +20,8 @@ Welcome to **Asteroids**, a SwiftUI-based remake of the classic arcade game. Thi
 ## Screenshots
 
 ### iPhone Screenshots
-![Gameplay Screenshot 1]([Screenshots/screenshot1.png](Asteroids/ScreenShots/AsteroidsGamePlay.PNG))
-![Gameplay Screenshot 2](Screenshots/screenshot2.png)
+![Gameplay Screenshot 1](/Asteroids/ScreenShots/AsteroidsGamePlay.PNG)
+![Gameplay Screenshot 2](/Asteroids/ScreenShots/AsteroidsGamePlay2.PNG)
 
 ## Controls
 - **iPhone:** Tap and swipe to control the ship.
