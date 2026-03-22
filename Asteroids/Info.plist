@@ -12,9 +12,9 @@
 		<key>UIColorName</key>
 		<string>LaunchScreenBackgroundColor</string>
 		<key>UIImageName</key>
-		<string>Title</string>
+		<string></string>
 		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
+		<false/>
 	</dict>
 </dict>
 </plist>

@@ -13,6 +13,7 @@ struct ControlsView: View {
 #if os(iOS)
         HStack {
             Spacer()
+            ZStack {
             Circle()
                 .fill(.red.gradient)
                 .stroke(.white, lineWidth: 2)
@@ -38,9 +39,14 @@ struct ControlsView: View {
                             }
                         })
                 )
-            
+                Text("\(Image(systemName: "arcade.stick.and.arrow.left"))")
+                        .foregroundColor(.white)
+                        .font(.system(size: 36))
+            }
+
             Spacer()
             VStack {
+                ZStack {
                 Circle()
                     .fill(
                         RadialGradient(gradient: Gradient(colors: [.red, .yellow, .orange, .purple]), center: .center, startRadius: 5, endRadius: 50)
@@ -55,6 +61,9 @@ struct ControlsView: View {
                                     manager.startNewGame()
                                 } else if manager.gameState == .playing {
                                     manager.fireBullet()
+                                    let impactHev = UIImpactFeedbackGenerator(style: .heavy)
+                                    impactHev.impactOccurred()
+
                                 } else if manager.gameState == .ended {
                                     manager.gameState = .intro
                                 } else if manager.gameState == .highscore {
@@ -62,44 +71,65 @@ struct ControlsView: View {
                                 }
                             })
                     )
-                HStack {
-                    Circle()
-                        .fill(
-                            RadialGradient(gradient: Gradient(colors: [.blue,.gray, .white]), center: .center, startRadius: 5, endRadius: 50)
-                        )
-                        .stroke(.white, lineWidth: 2)
-                        .frame(width: 50, height: 50)
-                        .gesture(
-                            TapGesture()
-                                .onEnded({_ in
-                                    if manager.gameState == .playing {
-                                        manager.hyperSpace()
-                                    }
-                                })
-                        )
-                    Spacer()
-                    Circle()
-                        .fill(
-                            RadialGradient(gradient: Gradient(colors: [.black,.gray, .white]), center: .center, startRadius: 5, endRadius: 50)
-                        )
-                        .stroke(.white, lineWidth: 2)
-                        .frame(width: 50, height: 50)
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged({_ in
-                                    if manager.gameState == .playing {
-                                        manager.startMovingShip()
-                                    }
-                                })
-                                .onEnded({_ in
-                                    manager.stopMovingShip()
-                                })
-                        )
+                Text("\(Image(systemName: "laser.burst"))")
+                        .foregroundColor(.white)
+                        .font(.system(size: 36))
+            }
 
-                    
+                
+                HStack {
+                    ZStack {
+                        Circle()
+                            .fill(
+                                RadialGradient(gradient: Gradient(colors: [.blue,.gray, .white]), center: .center, startRadius: 5, endRadius: 50)
+                            )
+                            .stroke(.white, lineWidth: 2)
+                            .frame(width: 50, height: 50)
+                            .gesture(
+                                TapGesture()
+                                    .onEnded({_ in
+                                        if manager.gameState == .playing {
+                                            manager.hyperSpace()
+                                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                            impactMed.impactOccurred()
+
+                                        }
+                                    })
+                            )
+                        Text("H")
+                                .foregroundColor(.white)
+                    }
+                    Spacer()
+                    ZStack {
+                        
+                        Circle()
+                            .fill(
+                                RadialGradient(gradient: Gradient(colors: [.black,.gray, .white]), center: .center, startRadius: 5, endRadius: 50)
+                            )
+                            .stroke(.white, lineWidth: 2)
+                            .frame(width: 50, height: 50)
+                            .gesture(
+                                DragGesture(minimumDistance: 0)
+                                    .onChanged({_ in
+                                        if manager.gameState == .playing {
+                                            manager.startMovingShip()
+
+                                            let impactHev = UIImpactFeedbackGenerator(style: .soft)
+                                            impactHev.impactOccurred()
+                                        }
+                                    })
+                                    .onEnded({_ in
+                                        manager.stopMovingShip()
+                                    })
+                            )
+                        Text("\(Image(systemName: "chevron.forward.circle"))")
+                                .foregroundColor(.white)
+                                .font(.system(size: 36))
+                    }
                 }
             }
             Spacer()
+            ZStack {
             Circle()
                 .fill(.red.gradient)
                 .stroke(.white, lineWidth: 2)
@@ -125,6 +155,11 @@ struct ControlsView: View {
                             }
                         })
                 )
+            Text("\(Image(systemName: "arcade.stick.and.arrow.right"))")
+                    .foregroundColor(.white)
+                    .font(.system(size: 36))
+        }
+
             Spacer()
         }
         #endif
