@@ -12,6 +12,7 @@ struct ContentView: View {
     var body: some View {
         ZStack(alignment: .top) {
             Color(.black)
+                .statusBar(hidden: true)
             VStack {
                 TopView()
                     .frame(width: UIScreen.main.bounds.width,height: 100, alignment: .center)
