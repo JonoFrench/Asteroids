@@ -42,6 +42,7 @@ struct ControlsView: View {
                 Text("\(Image(systemName: "arcade.stick.and.arrow.left"))")
                         .foregroundColor(.white)
                         .font(.system(size: 36))
+                .allowsHitTesting(false)
             }
 
             Spacer()
@@ -74,7 +75,8 @@ struct ControlsView: View {
                 Text("\(Image(systemName: "laser.burst"))")
                         .foregroundColor(.white)
                         .font(.system(size: 36))
-            }
+                    .allowsHitTesting(false)
+                }
 
                 
                 HStack {
@@ -98,6 +100,7 @@ struct ControlsView: View {
                             )
                         Text("H")
                                 .foregroundColor(.white)
+                        .allowsHitTesting(false)
                     }
                     Spacer()
                     ZStack {
@@ -125,6 +128,7 @@ struct ControlsView: View {
                         Text("\(Image(systemName: "chevron.forward.circle"))")
                                 .foregroundColor(.white)
                                 .font(.system(size: 36))
+                                .allowsHitTesting(false)
                     }
                 }
             }
@@ -158,7 +162,8 @@ struct ControlsView: View {
             Text("\(Image(systemName: "arcade.stick.and.arrow.right"))")
                     .foregroundColor(.white)
                     .font(.system(size: 36))
-        }
+                .allowsHitTesting(false)
+            }
 
             Spacer()
         }
