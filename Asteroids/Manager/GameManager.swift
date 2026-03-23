@@ -143,6 +143,7 @@ class GameManager: ObservableObject {
         score = 0 /// Set to 9500 odd to test extra lives....
         lives = 3
         level = 1
+        nextLifeScore = 5000
         shipAngle = 270.0
         hasSaucer = false
         startGame()
