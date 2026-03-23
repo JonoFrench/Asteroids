@@ -60,7 +60,7 @@ struct ControlsView: View {
                             .onEnded({
                                 if manager.gameState == .intro {
                                     manager.startNewGame()
-                                } else if manager.gameState == .playing {
+                                } else if manager.gameState == .playing && !manager.shipExploding {
                                     manager.fireBullet()
                                     let impactHev = UIImpactFeedbackGenerator(style: .heavy)
                                     impactHev.impactOccurred()

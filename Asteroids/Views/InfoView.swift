@@ -28,7 +28,7 @@ struct InfoView: View {
     var body: some View {
         VStack {
             Text("Scoring")
-                .foregroundStyle(.white)
+                .foregroundStyle(.red)
                 .font(.custom("Hyperspace-Bold", size: InfoView.headingTextSize))
             Spacer()
 
@@ -106,7 +106,7 @@ struct InfoView: View {
                 Spacer()
             }
             Spacer()
-            Text("Extra life every 10000 pts")
+            Text("Extra life every 5000 pts")
                 .foregroundStyle(.white)
                 .font(.custom("Hyperspace-Bold", size: InfoView.copyTextSize))
 

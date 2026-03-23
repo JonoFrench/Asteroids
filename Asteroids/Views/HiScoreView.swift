@@ -23,7 +23,7 @@ struct HiScoreView: View {
         VStack {
             Spacer()
             Text("High Scores")
-                .foregroundStyle(.white)
+                .foregroundStyle(.red)
                 .font(.custom("Hyperspace-Bold", size: HiScoreView.titleTextSize))
             Spacer()
             ForEach(scores.hiScores, id: \.self) {score in

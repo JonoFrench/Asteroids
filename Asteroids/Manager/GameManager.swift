@@ -59,7 +59,7 @@ class GameManager: ObservableObject {
     var hasSaucer = false
     var hasSaucerBullet = false
     var score = 0
-    var nextLifeScore = 10000
+    var nextLifeScore = 5000
     var level = 1
     ///For the background beat. This gets slightly faster the more asteroids you hit
     var heartBeat = 0.8
@@ -551,10 +551,10 @@ class GameManager: ObservableObject {
     ///Add to the score
     func addScore(newScore:Int) {
         score += newScore
-        ///Extra life every 10000 points
+        ///Extra life every 5000 points
         if score >= nextLifeScore {
             lives += 1
-            nextLifeScore += 10000
+            nextLifeScore += 5000
             soundFX.extraShipSound()
         }
     }

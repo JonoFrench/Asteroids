@@ -26,6 +26,10 @@ struct NewHighScoreView: View {
     var body: some View {
         VStack {
             Spacer()
+            Text("Game Over")
+                .foregroundStyle(.white)
+                .font(.custom("Hyperspace-Bold", size: NewHighScoreView.titleTextSize))
+            Spacer()
             Text("New High Score")
                 .foregroundStyle(.red)
                 .font(.custom("Hyperspace-Bold", size: NewHighScoreView.titleTextSize))
