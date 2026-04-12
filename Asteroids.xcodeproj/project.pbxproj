@@ -53,6 +53,8 @@
 		34DF5E882C9831D400BB79D6 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34DF5E862C98316A00BB79D6 /* GameController.framework */; platformFilters = (tvos, ); };
 		34DF5E8A2C98322F00BB79D6 /* ContentViewTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF5E892C98322F00BB79D6 /* ContentViewTV.swift */; };
 		34DF5E8C2C98526C00BB79D6 /* GameManager+TV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF5E8B2C98526C00BB79D6 /* GameManager+TV.swift */; };
+		34FA17F52F86546400DB071A /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 34FA17F42F86546400DB071A /* AppIcon.icon */; };
+		34FA17F72F865D2600DB071A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34FA17F62F865D2600DB071A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +113,8 @@
 		34DF5E892C98322F00BB79D6 /* ContentViewTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewTV.swift; sourceTree = "<group>"; };
 		34DF5E8B2C98526C00BB79D6 /* GameManager+TV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameManager+TV.swift"; sourceTree = "<group>"; };
 		34E517E62F12878400D5221E /* Asteroids.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Asteroids.entitlements; sourceTree = "<group>"; };
+		34FA17F42F86546400DB071A /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		34FA17F62F865D2600DB071A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +238,7 @@
 		34B38C312C5F9F0500C2CAAD /* Asteroids */ = {
 			isa = PBXGroup;
 			children = (
+				34FA17F62F865D2600DB071A /* LaunchScreen.storyboard */,
 				34E517E62F12878400D5221E /* Asteroids.entitlements */,
 				340999C82C987AC500F4FE3A /* ScreenShots */,
 				34858B6E2C66A1B3000E95F5 /* Manager */,
@@ -246,6 +251,7 @@
 				34B38C362C5F9F0700C2CAAD /* Assets.xcassets */,
 				34B38C382C5F9F0700C2CAAD /* Preview Content */,
 				34B38C532C60F96500C2CAAD /* VectorGraphics.swift */,
+				34FA17F42F86546400DB071A /* AppIcon.icon */,
 			);
 			path = Asteroids;
 			sourceTree = "<group>";
@@ -327,11 +333,13 @@
 				34A3280C2C61811C0092B175 /* extraShip.wav in Resources */,
 				34A3280A2C61811C0092B175 /* bangMedium.wav in Resources */,
 				34A328282C641C040092B175 /* Hyperspace Bold.otf in Resources */,
+				34FA17F52F86546400DB071A /* AppIcon.icon in Resources */,
 				34A3280D2C61811C0092B175 /* beat1.wav in Resources */,
 				34B38C3A2C5F9F0700C2CAAD /* Preview Assets.xcassets in Resources */,
 				34A328272C641C040092B175 /* Hyperspace.otf in Resources */,
 				34A328102C61811C0092B175 /* bangLarge.wav in Resources */,
 				34A328082C61811C0092B175 /* thrust.wav in Resources */,
+				34FA17F72F865D2600DB071A /* LaunchScreen.storyboard in Resources */,
 				34A328112C61811C0092B175 /* bangSmall.wav in Resources */,
 				34A3280B2C61811C0092B175 /* beat2.wav in Resources */,
 				34A3280E2C61811C0092B175 /* fire.wav in Resources */,
@@ -516,7 +524,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Asteroids/Asteroids.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Asteroids/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -525,6 +533,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.arcade-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -533,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaypeeff.Asteroids;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
@@ -552,7 +561,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = Asteroids/Asteroids.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Asteroids/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -561,6 +570,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.arcade-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -569,7 +579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jaypeeff.Asteroids;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";

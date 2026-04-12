@@ -25,6 +25,7 @@ struct InfoView: View {
     static var headingTextSize:CGFloat = 60
     static var copyTextSize:CGFloat = 32
 #endif
+    @State private var fontSize = 12.0 //36
     var body: some View {
         VStack {
             Text("Scoring")
@@ -113,8 +114,17 @@ struct InfoView: View {
             Spacer()
             Text("Press Fire to Start")
                 .foregroundStyle(.red)
-                .font(.custom("Hyperspace-Bold", size: InfoView.starttextSize))
+                .font(.custom("Hyperspace-Bold", size: fontSize))
+                .frame(maxWidth: .infinity,maxHeight: 80)
+                .multilineTextAlignment(.center)
         }.background(.clear)
+            .onAppear {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1.5)) {
+                    fontSize = InfoView.starttextSize
+                }
+                
+            }
+
     }
 }
 

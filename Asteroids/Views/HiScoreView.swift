@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HiScoreView: View {
     @EnvironmentObject var manager: GameManager
+    @State private var fontSize = 12.0 //36
 #if os(iOS)
     static var titleTextSize:CGFloat = 24
     static var scoreTextSize:CGFloat = 24
@@ -24,7 +25,7 @@ struct HiScoreView: View {
             Spacer()
             Text("High Scores")
                 .foregroundStyle(.red)
-                .font(.custom("Hyperspace-Bold", size: HiScoreView.titleTextSize))
+                .font(.custom("Hyperspace-Bold", size: HiScoreView.starttextSize))
             Spacer()
             ForEach(scores.hiScores, id: \.self) {score in
                 HStack{
@@ -44,9 +45,18 @@ struct HiScoreView: View {
             Spacer()
             Text("Press Fire to Start")
                 .foregroundStyle(.red)
-                .font(.custom("Hyperspace-Bold", size: HiScoreView.starttextSize))
+                .font(.custom("Hyperspace-Bold", size: fontSize))
+                .frame(maxWidth: .infinity,maxHeight: 80)
+                .multilineTextAlignment(.center)
 
         }.background(.clear)
+            .onAppear {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1.5)) {
+                    fontSize = HiScoreView.starttextSize
+                }
+                
+            }
+
     }
 }
 

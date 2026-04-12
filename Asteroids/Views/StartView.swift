@@ -15,6 +15,7 @@ struct StartView: View {
     static var starttextSize:CGFloat = 48
     static var copyTextSize:CGFloat = 36
 #endif
+    @State private var fontSize = 12.0 //36
 
     @EnvironmentObject var manager: GameManager
     var body: some View {
@@ -30,7 +31,9 @@ struct StartView: View {
                 Spacer()
                 Text("Press Fire to Start")
                     .foregroundStyle(.red)
-                    .font(.custom("Hyperspace-Bold", size: StartView.starttextSize))
+                    .font(.custom("Hyperspace-Bold", size: fontSize))
+                    .frame(maxWidth: .infinity,maxHeight: 80)
+                    .multilineTextAlignment(.center)
                 Spacer()
                 Text("© Jonathan French 2026")
                     .foregroundStyle(.white)
@@ -41,12 +44,12 @@ struct StartView: View {
                     .font(.custom("Hyperspace-Bold", size: StartView.copyTextSize))
                 Spacer()
             }.background(.clear)
-//                .onAppear {
-//                    print("game size \(proxy.size)")
-//                    manager.gameSize = proxy.size
-//                    manager.shipStartPos = CGPoint(x: proxy.size.width / 2, y: proxy.size.height / 2)
-//                }
-//        }
+            .onAppear {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1.5)) {
+                    fontSize = 30
+                }
+                
+            }
     }
 }
 
